@@ -22,24 +22,24 @@ RSpec.describe "Public showcase", type: :system do
     expect(page).to have_link("Galerie")
     expect(page).to have_link("Contact")
 
-    click_link "La Carte"
+    within("nav.al-nav") { click_link "La Carte" }
     expect(page).to have_current_path(menu_path)
     expect(page).to have_content("Desserts")
     expect(page).to have_content("Tarte aux pommes")
     expect(page).to have_content("Cuisine locale et produits frais")
 
-    click_link "Galerie"
+    within("nav.al-nav") { click_link "Galerie" }
     expect(page).to have_current_path(gallery_path)
     expect(page).to have_content("Galerie")
     expect(page).to have_content("Terrasse")
 
-    click_link "Contact"
+    within("nav.al-nav") { click_link "Contact" }
     expect(page).to have_current_path(contact_path)
     expect(page).to have_content("Salles-Curan")
     expect(page).to have_content("01 02 03 04 05")
     expect(page).to have_content("contact@altoupi.test")
 
-    click_link "Accueil"
+    within("nav.al-nav") { click_link "Accueil" }
     expect(page).to have_current_path(root_path)
     expect(page).to have_content("Horaires d'ouverture")
 

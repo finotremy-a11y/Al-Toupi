@@ -11,6 +11,7 @@ RSpec.describe "PagesController", type: :request do
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("Bienvenue test")
       expect(response.body).to include("Facade")
+      expect(response.body).to include("aria-controls=\"mobile-menu\"")
     end
   end
 

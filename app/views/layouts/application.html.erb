@@ -22,16 +22,53 @@
   <body class="bg-al-bg text-al-text font-sans">
 
     <%# == Navigation == %>
-    <header class="al-header">
+    <header class="al-header" data-controller="mobile-nav" data-action="keydown.esc@window->mobile-nav#closeOnEscape click@window->mobile-nav#closeOnOutsideClick">
       <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
         <%= link_to root_path, class: "text-3xl font-bold text-al-primary tracking-wide al-brand-script" do %>
           Al Toupi
         <% end %>
+
+        <button
+          type="button"
+          class="al-hamburger-btn md:hidden"
+          aria-label="Ouvrir le menu"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          data-mobile-nav-target="button"
+          data-action="mobile-nav#toggle">
+          <span class="sr-only">Menu</span>
+          <span class="al-hamburger-icon" aria-hidden="true">
+            <span class="al-hamburger-line al-hamburger-line--top"></span>
+            <span class="al-hamburger-line al-hamburger-line--middle"></span>
+            <span class="al-hamburger-line al-hamburger-line--bottom"></span>
+          </span>
+        </button>
+
         <nav class="al-nav hidden md:flex">
           <%= link_to "Accueil",  root_path,    class: "#{current_page?(root_path) ? 'active' : ''}" %>
           <%= link_to "La Carte", menu_path,    class: "#{current_page?(menu_path) ? 'active' : ''}" %>
           <%= link_to "Galerie",  gallery_path, class: "#{current_page?(gallery_path) ? 'active' : ''}" %>
           <%= link_to "Contact",  contact_path, class: "#{current_page?(contact_path) ? 'active' : ''}" %>
+        </nav>
+      </div>
+
+      <div id="mobile-menu"
+           class="md:hidden hidden border-t border-al-bg-medium bg-white shadow-al-soft"
+           aria-hidden="true"
+           data-mobile-nav-target="panel">
+        <nav class="max-w-5xl mx-auto px-4 py-3 flex flex-col gap-1" aria-label="Navigation mobile">
+          <%= link_to "Accueil", root_path,
+                class: "px-3 py-3 rounded-al font-semibold text-al-text hover:bg-al-bg-light #{current_page?(root_path) ? 'bg-al-bg-light text-al-primary' : ''}",
+                data: { action: "mobile-nav#close" } %>
+          <%= link_to "La Carte", menu_path,
+                class: "px-3 py-3 rounded-al font-semibold text-al-text hover:bg-al-bg-light #{current_page?(menu_path) ? 'bg-al-bg-light text-al-primary' : ''}",
+                data: { action: "mobile-nav#close" } %>
+          <%= link_to "Galerie", gallery_path,
+                class: "px-3 py-3 rounded-al font-semibold text-al-text hover:bg-al-bg-light #{current_page?(gallery_path) ? 'bg-al-bg-light text-al-primary' : ''}",
+                data: { action: "mobile-nav#close" } %>
+          <%= link_to "Contact", contact_path,
+                class: "px-3 py-3 rounded-al font-semibold text-al-text hover:bg-al-bg-light #{current_page?(contact_path) ? 'bg-al-bg-light text-al-primary' : ''}",
+                data: { action: "mobile-nav#close" } %>
         </nav>
       </div>
     </header>
