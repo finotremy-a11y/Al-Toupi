@@ -13,4 +13,13 @@ class PagesController < ApplicationController
 
   def contact
   end
+
+  def legal_mentions
+  end
+
+  def privacy_policy
+  end
+
+  def cookies_policy
+  end
 end

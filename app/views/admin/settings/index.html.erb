@@ -7,6 +7,38 @@
           class: "al-btn al-btn-primary font-semibold" %>
   </div>
 
+  <% legal_settings = [
+    { key: "legal_company_name", label: "Raison sociale" },
+    { key: "legal_director", label: "Directeur de publication" },
+    { key: "legal_host_name", label: "Nom de l'hébergeur" },
+    { key: "legal_host_address", label: "Adresse de l'hébergeur" },
+    { key: "legal_host_phone", label: "Téléphone de l'hébergeur" }
+  ] %>
+  <% settings_by_key = @settings.index_by(&:key) %>
+
+  <div class="al-card al-card-light mb-6">
+    <h2 class="font-display text-al-primary text-2xl font-bold mb-2">Informations légales</h2>
+    <p class="text-sm text-al-text/70 mb-4">
+      Renseignez ces champs pour alimenter automatiquement la page Mentions légales.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <% legal_settings.each do |item| %>
+        <% existing = settings_by_key[item[:key]] %>
+        <div class="border border-al-text/10 rounded-xl p-4 bg-white/70">
+          <p class="font-semibold text-al-text"><%= item[:label] %></p>
+          <p class="font-mono text-xs text-al-text/55 mt-1"><%= item[:key] %></p>
+          <div class="mt-3">
+            <% if existing.present? %>
+              <%= link_to "Modifier", edit_admin_setting_path(existing), class: "al-btn al-btn-sm al-btn-outline" %>
+            <% else %>
+              <%= link_to "Créer", new_admin_setting_path(key: item[:key]), class: "al-btn al-btn-sm al-btn-primary" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
   <div class="al-card shadow-al-medium overflow-x-auto">
     <table class="al-table w-full">
       <thead>

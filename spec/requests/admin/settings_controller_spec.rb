@@ -26,6 +26,18 @@ RSpec.describe "Admin::SettingsController", type: :request do
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("Paramètres du site")
       expect(response.body).to include("telephone")
+      expect(response.body).to include("Informations légales")
+      expect(response.body).to include("Raison sociale")
+      expect(response.body).to include("legal_company_name")
+    end
+
+    it "prefills key when opening new with key param" do
+      get new_admin_setting_path, params: { key: "legal_company_name" }
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("value=\"legal_company_name\"")
+      expect(response.body).to include("legal_company_name, legal_director, legal_host_name")
+      expect(response.body).to include("Saisissez la valeur affichée sur le site public")
     end
 
     it "creates setting and redirects with flash" do

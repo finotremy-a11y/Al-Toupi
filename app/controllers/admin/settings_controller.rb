@@ -6,7 +6,7 @@ class Admin::SettingsController < Admin::BaseController
   end
 
   def new
-    @setting = Setting.new
+    @setting = Setting.new(key: params[:key])
   end
 
   def create

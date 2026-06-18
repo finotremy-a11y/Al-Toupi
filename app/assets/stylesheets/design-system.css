@@ -2,7 +2,7 @@
 /* Palette Terroir Premium - Vert, Beige, Marron */
 
 /* === IMPORTS === */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* === CSS VARIABLES === */
 :root {
@@ -19,7 +19,8 @@
   --al-bg: #FAF7F2;
 
   /* Typographies */
-  --font-display: 'Playfair Display', serif;
+  --font-display: 'Cormorant Garamond', serif;
+  --font-brand: 'Great Vibes', cursive;
   --font-body: 'Inter', system-ui, sans-serif;
 
   /* Espacements */
@@ -202,8 +203,23 @@ a:hover {
 
 .al-footer {
   background-color: var(--al-text-dark);
-  color: #e5e7eb;
+  color: #f1f5f9;
   margin-top: var(--spacing-2xl);
+}
+
+.al-footer p,
+.al-footer li,
+.al-footer span {
+  color: #f1f5f9;
+}
+
+.al-footer a {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.al-footer a:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 .al-footer-title {
@@ -512,6 +528,12 @@ a:hover {
 
 .al-slide-in {
   animation: slideInLeft 0.6s ease-out;
+}
+
+.al-brand-script {
+  font-family: var(--font-brand);
+  font-weight: 400;
+  letter-spacing: 0.01em;
 }
 
 /* === UTILITIES === */

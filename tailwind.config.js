@@ -22,7 +22,7 @@ export default {
         'al-bg': '#FAF7F2',           // Blanc cassé - fond global
       },
       fontFamily: {
-        'display': ['Playfair Display', 'serif'],
+        'display': ['Cormorant Garamond', 'serif'],
         'sans': ['Inter', 'system-ui', 'sans-serif'],
       },
       fontSize: {

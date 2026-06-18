@@ -1,0 +1,40 @@
+<section class="al-section-lg">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="font-display text-al-primary text-5xl font-bold mb-8">Mentions légales</h1>
+
+    <div class="al-card al-card-light space-y-6">
+      <div>
+        <h2 class="font-display text-al-primary text-2xl font-bold mb-2">Éditeur du site</h2>
+        <p>
+          <strong><%= setting_value("legal_company_name", "Al Toupi") %></strong><br>
+          <%= setting_value("adresse", "Salles-Curan, Aveyron") %><br>
+          Téléphone : <%= setting_value("telephone", "-") %><br>
+          Email : <%= setting_value("email", "-") %>
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-al-primary text-2xl font-bold mb-2">Responsable de publication</h2>
+        <p><%= setting_value("legal_director", "Direction Al Toupi") %></p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-al-primary text-2xl font-bold mb-2">Hébergement</h2>
+        <p>
+          <%= setting_value("legal_host_name", "Hébergeur à renseigner") %><br>
+          <%= setting_value("legal_host_address", "Adresse hébergeur") %><br>
+          <%= setting_value("legal_host_phone", "Téléphone hébergeur") %>
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display text-al-primary text-2xl font-bold mb-2">Propriété intellectuelle</h2>
+        <p>
+          L'ensemble des contenus du site (textes, images, éléments graphiques, logo) est protégé
+          par le droit de la propriété intellectuelle. Toute reproduction, représentation ou diffusion,
+          totale ou partielle, sans autorisation préalable est interdite.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

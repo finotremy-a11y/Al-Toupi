@@ -24,7 +24,7 @@
     <%# == Navigation == %>
     <header class="al-header">
       <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-        <%= link_to root_path, class: "text-3xl font-bold font-display text-al-primary tracking-wide" do %>
+        <%= link_to root_path, class: "text-3xl font-bold text-al-primary tracking-wide al-brand-script" do %>
           Al Toupi
         <% end %>
         <nav class="al-nav hidden md:flex">
@@ -70,7 +70,17 @@
           <p class="whitespace-pre-line"><%= setting_value("horaires", "-") %></p>
         </div>
       </div>
-      <p class="text-center text-gray-400 text-xs py-4 border-t border-gray-700">&copy; <%= Date.current.year %> Al Toupi - Restaurant traditionnel</p>
+
+      <div class="border-t border-white/20">
+        <div class="max-w-5xl mx-auto px-4 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+          <p class="text-xs md:text-sm text-white/85">&copy; <%= Date.current.year %> Al Toupi - Restaurant traditionnel</p>
+          <nav class="flex flex-wrap gap-4 text-xs md:text-sm">
+            <%= link_to "Mentions légales", legal_mentions_path, class: "text-white/90 hover:text-white" %>
+            <%= link_to "Politique de confidentialité", privacy_policy_path, class: "text-white/90 hover:text-white" %>
+            <%= link_to "Politique cookies", cookies_policy_path, class: "text-white/90 hover:text-white" %>
+          </nav>
+        </div>
+      </div>
     </footer>
 
   </body>
