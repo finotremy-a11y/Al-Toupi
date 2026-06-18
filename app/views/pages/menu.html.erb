@@ -13,47 +13,75 @@
       </p>
     <% end %>
 
-    <% if @categories.empty? %>
-      <p class="text-center text-al-text/50 py-12">La carte n'est pas encore disponible.</p>
-    <% end %>
+    <% if @menu_card&.file&.attached? %>
+      <div class="al-card al-card-light shadow-al-medium">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+          <h2 class="font-display text-al-primary text-3xl font-bold"><%= @menu_card.title %></h2>
+          <%= link_to "Télécharger la carte", url_for(@menu_card.file),
+                class: "al-btn al-btn-primary",
+                target: "_blank",
+                rel: "noopener" %>
+        </div>
 
-    <% @categories.each_with_index do |category, cat_index| %>
-      <div class="mb-16 al-fade-in" style="animation-delay: #{cat_index * 0.1}s">
-        <h2 class="font-display text-al-primary text-4xl font-bold border-b-2 border-al-secondary pb-4 mb-8">
-          <%= category.name %>
-        </h2>
+        <% if @menu_card.image? %>
+          <div class="rounded-al-lg overflow-hidden border border-al-bg-medium bg-white">
+            <%= image_tag @menu_card.file,
+                  class: "w-full h-auto",
+                  alt: @menu_card.title %>
+          </div>
+        <% else %>
+          <div class="rounded-al-lg overflow-hidden border border-al-bg-medium bg-white" style="min-height: 60vh;">
+            <iframe
+              src="<%= url_for(@menu_card.file) %>"
+              class="w-full h-[70vh] min-h-[28rem] border-0"
+              title="<%= @menu_card.title %>">
+            </iframe>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <% if @categories.empty? %>
+        <p class="text-center text-al-text/50 py-12">La carte n'est pas encore disponible.</p>
+      <% end %>
 
-        <div class="space-y-6">
-          <% category.dishes.ordered.each_with_index do |dish, idx| %>
-            <div class="al-card hover:shadow-al-strong transition-all duration-300 al-slide-in" style="animation-delay: #{(cat_index * 0.1) + (idx * 0.05)}s">
-              <div class="flex items-start gap-6">
-                <% if dish.photo.attached? %>
-                  <div class="flex-shrink-0 overflow-hidden rounded-al w-24 h-24">
-                    <%= image_tag dish.photo,
-                          class: "w-full h-full object-cover transition-transform duration-500 hover:scale-110",
-                          alt: dish.name %>
-                  </div>
-                <% end %>
-                <div class="flex-1">
-                  <div class="flex justify-between items-start gap-4 mb-2">
-                    <h3 class="font-display text-al-primary font-bold text-xl">
-                      <%= dish.name %>
-                    </h3>
-                    <span class="font-display text-al-secondary font-bold text-xl whitespace-nowrap">
-                      <%= number_to_currency(dish.price, unit: "€", format: "%n %u") %>
-                    </span>
-                  </div>
-                  <% if dish.description.present? %>
-                    <p class="text-al-text/70 text-sm font-light italic">
-                      <%= dish.description %>
-                    </p>
+      <% @categories.each_with_index do |category, cat_index| %>
+        <div class="mb-16 al-fade-in" style="animation-delay: #{cat_index * 0.1}s">
+          <h2 class="font-display text-al-primary text-4xl font-bold border-b-2 border-al-secondary pb-4 mb-8">
+            <%= category.name %>
+          </h2>
+
+          <div class="space-y-6">
+            <% category.dishes.ordered.each_with_index do |dish, idx| %>
+              <div class="al-card hover:shadow-al-strong transition-all duration-300 al-slide-in" style="animation-delay: #{(cat_index * 0.1) + (idx * 0.05)}s">
+                <div class="flex items-start gap-6">
+                  <% if dish.photo.attached? %>
+                    <div class="flex-shrink-0 overflow-hidden rounded-al w-24 h-24">
+                      <%= image_tag dish.photo,
+                            class: "w-full h-full object-cover transition-transform duration-500 hover:scale-110",
+                            alt: dish.name %>
+                    </div>
                   <% end %>
+                  <div class="flex-1">
+                    <div class="flex justify-between items-start gap-4 mb-2">
+                      <h3 class="font-display text-al-primary font-bold text-xl">
+                        <%= dish.name %>
+                      </h3>
+                      <span class="font-display text-al-secondary font-bold text-xl whitespace-nowrap">
+                        <%= number_to_currency(dish.price, unit: "€", format: "%n %u") %>
+                      </span>
+                    </div>
+                    <% if dish.description.present? %>
+                      <p class="text-al-text/70 text-sm font-light italic">
+                        <%= dish.description %>
+                      </p>
+                    <% end %>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </section>

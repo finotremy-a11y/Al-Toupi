@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   end
 
   def menu
+    @menu_card = MenuCard.first
     @categories = DishCategory.ordered.includes(dishes: { photo_attachment: :blob })
   end
 

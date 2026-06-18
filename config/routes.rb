@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root "dashboard#index"
     resources :photos
+    resource :menu_card, only: %i[show update destroy]
     resources :dish_categories
     resources :dishes
     resources :settings

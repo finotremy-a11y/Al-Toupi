@@ -389,6 +389,29 @@ a:hover {
   transform: translateY(-0.42rem) rotate(-45deg);
 }
 
+@media (min-width: 768px) {
+  .al-hamburger-btn {
+    display: none !important;
+  }
+}
+
+.al-file-input::file-selector-button {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-al);
+  border: 2px solid var(--al-bg-medium);
+  background-color: var(--al-bg-light);
+  color: var(--al-primary);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.al-file-input::file-selector-button:hover {
+  background-color: var(--al-bg-medium);
+  border-color: var(--al-primary-light);
+}
+
 /* === BADGES & TAGS === */
 .al-badge {
   display: inline-block;

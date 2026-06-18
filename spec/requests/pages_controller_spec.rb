@@ -26,6 +26,18 @@ RSpec.describe "PagesController", type: :request do
       expect(response.body).to include("Desserts")
       expect(response.body).to include("Tarte")
     end
+
+    it "renders uploaded menu card when available" do
+      create(:menu_card, title: "Carte photo")
+      create(:dish_category, name: "Desserts")
+
+      get menu_path
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Carte photo")
+      expect(response.body).to include("Télécharger la carte")
+      expect(response.body).not_to include("Desserts")
+    end
   end
 
   describe "GET /galerie" do
