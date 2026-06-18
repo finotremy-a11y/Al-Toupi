@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>Admin - Al Toupi</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-al-bg text-al-text font-sans">
+
+    <%# == Barre de navigation admin == %>
+    <header class="al-admin-header">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-8">
+          <%= link_to admin_root_path, class: "font-display font-bold text-2xl text-white hover:text-white/90 transition-colors" do %>
+            Al Toupi — Admin
+          <% end %>
+          <nav class="hidden lg:flex gap-6 text-sm font-medium">
+            <%= link_to "Galerie",     admin_photos_path,          class: "text-white/90 hover:text-white transition-colors" %>
+            <%= link_to "Catégories",  admin_dish_categories_path, class: "text-white/90 hover:text-white transition-colors" %>
+            <%= link_to "Plats",       admin_dishes_path,          class: "text-white/90 hover:text-white transition-colors" %>
+            <%= link_to "Paramètres",  admin_settings_path,        class: "text-white/90 hover:text-white transition-colors" %>
+          </nav>
+        </div>
+        <div class="flex items-center gap-4 text-sm font-medium">
+          <%= link_to "👁 Voir le site", root_path, target: "_blank", class: "text-white/90 hover:text-white transition-colors" %>
+          <%= button_to "🚪 Déconnexion", logout_path, method: :delete,
+                class: "al-btn al-btn-light font-semibold" %>
+        </div>
+      </div>
+    </header>
+
+    <%# == Flash messages == %>
+    <% if notice.present? %>
+      <div class="al-alert al-alert-success text-center max-w-4xl mx-auto mt-4" role="alert">
+        ✓ <%= notice %>
+      </div>
+    <% end %>
+    <% if alert.present? %>
+      <div class="al-alert al-alert-error text-center max-w-4xl mx-auto mt-4" role="alert">
+        ✗ <%= alert %>
+      </div>
+    <% end %>
+
+    <%# == Contenu == %>
+    <main class="max-w-6xl mx-auto px-4 py-8">
+      <%= yield %>
+    </main>
+
+  </body>
+</html>

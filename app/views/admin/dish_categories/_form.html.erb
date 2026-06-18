@@ -1,0 +1,32 @@
+<div class="al-card al-card-light shadow-al-medium max-w-2xl mx-auto">
+  <%= form_with model: [:admin, dish_category], class: "space-y-6" do |f| %>
+    <% if dish_category.errors.any? %>
+      <div class="al-alert al-alert-error">
+        <p class="font-semibold mb-2">Veuillez corriger les erreurs suivantes :</p>
+        <ul class="list-disc list-inside space-y-1 text-sm">
+          <% dish_category.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="al-form-group">
+      <%= f.label :name, "Nom" %>
+      <%= f.text_field :name, required: true, class: "al-input", placeholder: "Ex: Entrées" %>
+    </div>
+
+    <div class="al-form-group">
+      <%= f.label :position, "Position" %>
+      <%= f.number_field :position, class: "al-input", placeholder: "1" %>
+    </div>
+
+    <div class="al-divider"></div>
+
+    <div class="flex flex-col sm:flex-row gap-3 pt-1">
+      <%= f.submit dish_category.persisted? ? "Enregistrer" : "Créer",
+            class: "al-btn al-btn-primary px-6 py-3" %>
+      <%= link_to "Annuler", admin_dish_categories_path, class: "al-btn al-btn-outline px-6 py-3" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,52 @@
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
+  <div>
+    <h1 class="font-display text-al-primary text-3xl font-bold mb-2">Catégories de plats</h1>
+    <p class="text-al-text/70 text-sm">Organisez votre menu par catégories</p>
+  </div>
+  <%= link_to "➕ Ajouter une catégorie", new_admin_dish_category_path,
+        class: "al-btn al-btn-primary font-semibold" %>
+</div>
+
+<div class="al-card shadow-al-medium overflow-hidden">
+  <table class="al-table w-full">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th class="text-center">Position</th>
+        <th class="text-center">Plats</th>
+        <th class="text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @dish_categories.each do |category| %>
+        <tr>
+          <td class="font-semibold text-al-primary text-lg"><%= category.name %></td>
+          <td class="text-center">
+            <span class="al-badge al-badge-light">
+              <%= category.position %>
+            </span>
+          </td>
+          <td class="text-center">
+            <span class="al-badge al-badge-secondary">
+              <%= category.dishes.count %>
+            </span>
+          </td>
+          <td class="text-right space-x-2">
+            <%= link_to "✏️ Modifier", edit_admin_dish_category_path(category), class: "al-btn al-btn-sm al-btn-outline" %>
+            <%= button_to "🗑️ Supprimer", admin_dish_category_path(category), method: :delete,
+                  data: { turbo_confirm: "Supprimer cette catégorie et tous ses plats ?" },
+                  class: "al-btn al-btn-sm text-red-600 hover:text-red-700 bg-transparent border-0 cursor-pointer text-sm font-semibold" %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @dish_categories.empty? %>
+        <tr>
+          <td colspan="4" class="text-center py-12 text-al-text/50">
+            Aucune catégorie enregistrée.
+            <%= link_to "Ajouter la première →", new_admin_dish_category_path, class: "text-al-primary font-semibold hover:underline" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

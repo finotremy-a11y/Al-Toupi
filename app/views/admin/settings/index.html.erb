@@ -1,0 +1,50 @@
+  <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
+    <div>
+      <h1 class="font-display text-al-primary text-3xl font-bold mb-2">Paramètres du site</h1>
+      <p class="text-al-text/70 text-sm">Configuration et informations importantes</p>
+    </div>
+    <%= link_to "➕ Ajouter un paramètre", new_admin_setting_path,
+          class: "al-btn al-btn-primary font-semibold" %>
+  </div>
+
+  <div class="al-card shadow-al-medium overflow-x-auto">
+    <table class="al-table w-full">
+      <thead>
+        <tr>
+          <th class="w-1/3">Clé</th>
+          <th>Valeur</th>
+          <th class="text-right">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @settings.each do |setting| %>
+          <tr>
+            <td class="font-mono text-xs text-al-secondary font-bold">
+              <%= setting.key %>
+            </td>
+            <td class="text-al-text/70">
+              <% if setting.value.present? %>
+                <span class="line-clamp-2"><%= setting.value %></span>
+              <% else %>
+                <span class="text-al-text/40 italic">vide</span>
+              <% end %>
+            </td>
+            <td class="text-right space-x-2">
+              <%= link_to "✏️ Modifier", edit_admin_setting_path(setting), class: "al-btn al-btn-sm al-btn-outline" %>
+              <%= button_to "🗑️ Supprimer", admin_setting_path(setting), method: :delete,
+                    data: { turbo_confirm: "Supprimer ce paramètre ?" },
+                    class: "al-btn al-btn-sm text-red-600 hover:text-red-700 bg-transparent border-0 cursor-pointer text-sm font-semibold" %>
+            </td>
+          </tr>
+        <% end %>
+        <% if @settings.empty? %>
+          <tr>
+            <td colspan="3" class="text-center py-12 text-al-text/50">
+              Aucun paramètre enregistré.
+              <%= link_to "Ajouter le premier →", new_admin_setting_path, class: "text-al-primary font-semibold hover:underline" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>

@@ -1,0 +1,82 @@
+<%# == Contact == %>
+<section class="al-section-lg">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-16 al-fade-in">
+      <h1 class="font-display text-al-primary text-5xl md:text-6xl font-bold mb-4">Nous trouver</h1>
+      <div class="w-24 h-1 bg-gradient-to-r from-al-primary to-al-secondary mx-auto rounded-full"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12">
+      <%# Informations pratiques %>
+      <div class="al-card al-card-light shadow-al-medium hover:shadow-al-strong transition-all duration-300 al-fade-in">
+        <h2 class="font-display text-al-primary text-3xl font-bold mb-8 pb-4 border-b-2 border-al-secondary">
+          Informations pratiques
+        </h2>
+
+        <% adresse = setting_value("adresse") %>
+        <% if adresse.present? %>
+          <div class="mb-8">
+            <h3 class="text-xs uppercase tracking-widest font-bold text-al-secondary mb-3">📍 Adresse</h3>
+            <p class="text-al-text whitespace-pre-line font-light text-lg">
+              <%= adresse %>
+            </p>
+          </div>
+        <% end %>
+
+        <% telephone = setting_value("telephone") %>
+        <% if telephone.present? %>
+          <div class="mb-8">
+            <h3 class="text-xs uppercase tracking-widest font-bold text-al-secondary mb-3">☎️ Téléphone</h3>
+            <p>
+              <%= link_to telephone, "tel:#{telephone.gsub(/\s/, '')}", 
+                    class: "text-al-primary hover:text-al-primary-medium font-semibold text-lg underline transition-colors" %>
+            </p>
+          </div>
+        <% end %>
+
+        <% email_val = setting_value("email") %>
+        <% if email_val.present? %>
+          <div class="mb-8">
+            <h3 class="text-xs uppercase tracking-widest font-bold text-al-secondary mb-3">✉️ Email</h3>
+            <p>
+              <%= mail_to email_val, email_val, 
+                    class: "text-al-primary hover:text-al-primary-medium font-semibold text-lg underline transition-colors" %>
+            </p>
+          </div>
+        <% end %>
+
+        <% horaires = setting_value("horaires") %>
+        <% if horaires.present? %>
+          <div class="pt-4 border-t-2 border-al-bg-medium">
+            <h3 class="text-xs uppercase tracking-widest font-bold text-al-secondary mb-3">🕐 Horaires</h3>
+            <p class="text-al-text whitespace-pre-line font-light text-lg">
+              <%= horaires %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+
+      <%# Carte Google Maps intégrée %>
+      <div class="al-fade-in" style="animation-delay: 0.1s;">
+        <h2 class="font-display text-al-primary text-3xl font-bold mb-6">Localisation</h2>
+        <% maps_url = setting_value("maps_embed_url") %>
+        <% if maps_url.present? %>
+          <div class="rounded-al-lg overflow-hidden shadow-al-medium hover:shadow-al-strong transition-shadow duration-300">
+            <iframe
+              src="<%= maps_url %>"
+              class="w-full h-96 border-0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Localisation Al Toupi">
+            </iframe>
+          </div>
+        <% else %>
+          <div class="w-full h-96 bg-al-bg-light rounded-al-lg flex items-center justify-center text-al-text/50 text-lg font-light shadow-al-soft border-2 border-dashed border-al-bg-medium">
+            Carte non configurée
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>Al Toupi - Restaurant à Salles-Curan</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Al Toupi">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-al-bg text-al-text font-sans">
+
+    <%# == Navigation == %>
+    <header class="al-header">
+      <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+        <%= link_to root_path, class: "text-3xl font-bold font-display text-al-primary tracking-wide" do %>
+          Al Toupi
+        <% end %>
+        <nav class="al-nav hidden md:flex">
+          <%= link_to "Accueil",  root_path,    class: "#{current_page?(root_path) ? 'active' : ''}" %>
+          <%= link_to "La Carte", menu_path,    class: "#{current_page?(menu_path) ? 'active' : ''}" %>
+          <%= link_to "Galerie",  gallery_path, class: "#{current_page?(gallery_path) ? 'active' : ''}" %>
+          <%= link_to "Contact",  contact_path, class: "#{current_page?(contact_path) ? 'active' : ''}" %>
+        </nav>
+      </div>
+    </header>
+
+    <%# == Flash messages == %>
+    <% if notice.present? %>
+      <div class="al-alert al-alert-success text-center" role="alert">
+        ✓ <%= notice %>
+      </div>
+    <% end %>
+    <% if alert.present? %>
+      <div class="al-alert al-alert-error text-center" role="alert">
+        ✗ <%= alert %>
+      </div>
+    <% end %>
+
+    <%# == Contenu principal == %>
+    <main>
+      <%= yield %>
+    </main>
+
+    <%# == Footer == %>
+    <footer class="al-footer">
+      <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 py-12">
+        <div>
+          <h3 class="al-footer-title">Al Toupi</h3>
+          <p><%= setting_value("adresse", "Salles-Curan, Aveyron") %></p>
+        </div>
+        <div>
+          <h3 class="al-footer-title">Contact</h3>
+          <p>Tél : <%= setting_value("telephone", "-") %></p>
+          <p>Email : <%= setting_value("email", "-") %></p>
+        </div>
+        <div>
+          <h3 class="al-footer-title">Horaires</h3>
+          <p class="whitespace-pre-line"><%= setting_value("horaires", "-") %></p>
+        </div>
+      </div>
+      <p class="text-center text-gray-400 text-xs py-4 border-t border-gray-700">&copy; <%= Date.current.year %> Al Toupi - Restaurant traditionnel</p>
+    </footer>
+
+  </body>
+</html>

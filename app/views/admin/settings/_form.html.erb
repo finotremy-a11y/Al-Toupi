@@ -1,0 +1,33 @@
+<div class="al-card al-card-light shadow-al-medium max-w-2xl mx-auto">
+  <%= form_with model: [:admin, setting], class: "space-y-6" do |f| %>
+    <% if setting.errors.any? %>
+      <div class="al-alert al-alert-error">
+        <p class="font-semibold mb-2">Veuillez corriger les erreurs suivantes :</p>
+        <ul class="list-disc list-inside space-y-1 text-sm">
+          <% setting.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="al-form-group">
+      <%= f.label :key, "Clé (identifiant technique)" %>
+      <%= f.text_field :key, required: true, placeholder: "ex: adresse, telephone, horaires", class: "al-input font-mono" %>
+      <p class="mt-2 text-xs text-al-text/50">Cette clé est utilisée par le site pour récupérer la valeur.</p>
+    </div>
+
+    <div class="al-form-group">
+      <%= f.label :value, "Valeur" %>
+      <%= f.text_area :value, rows: 5, class: "al-textarea", placeholder: "Saisissez la valeur affichée sur le site" %>
+    </div>
+
+    <div class="al-divider"></div>
+
+    <div class="flex flex-col sm:flex-row gap-3 pt-1">
+      <%= f.submit setting.persisted? ? "Enregistrer" : "Créer",
+            class: "al-btn al-btn-primary px-6 py-3" %>
+      <%= link_to "Annuler", admin_settings_path, class: "al-btn al-btn-outline px-6 py-3" %>
+    </div>
+  <% end %>
+</div>

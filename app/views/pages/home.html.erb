@@ -1,0 +1,81 @@
+<%# == Hero Section == %>
+<section class="al-hero relative min-h-screen flex items-center justify-center bg-gradient-to-r from-al-primary to-al-secondary text-white overflow-hidden">
+  <% featured = @photos.first %>
+  <% if featured&.image&.attached? %>
+    <%= image_tag featured.image,
+          class: "absolute inset-0 w-full h-full object-cover opacity-100",
+          alt: featured.title.presence || "Al Toupi" %>
+  <% end %>
+  <div class="absolute inset-0 bg-gradient-to-t from-al-primary/10 to-al-secondary/5"></div>
+  <div class="relative z-10 text-center px-4 max-w-2xl mx-auto al-fade-in">
+    <h1 class="font-display text-5xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
+      Al Toupi
+    </h1>
+    <p class="text-xl md:text-2xl mb-8 text-white/95 font-light drop-shadow">
+      Restaurant traditionnel à Salles-Curan, Aveyron
+    </p>
+    <div class="flex gap-4 justify-center flex-wrap">
+      <%= link_to "Découvrir la carte", menu_path,
+            class: "al-btn al-btn-light al-btn-lg font-semibold" %>
+      <%= link_to "Nous contacter", contact_path,
+            class: "al-btn al-btn-light al-btn-lg font-semibold shadow-al-medium ring-2 ring-white/30 hover:shadow-al-strong" %>
+    </div>
+  </div>
+</section>
+
+<%# == Présentation == %>
+<section class="al-section al-section-light al-fade-in">
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="font-display text-al-primary text-4xl md:text-5xl font-bold mb-6">Bienvenue</h2>
+    <p class="text-al-text text-lg leading-relaxed font-light">
+      <%= setting_value("texte_accueil", "Bienvenue au restaurant Al Toupi, cuisine traditionnelle et chaleureuse au cœur de l'Aveyron.") %>
+    </p>
+  </div>
+</section>
+
+<%# == Galerie aperçu == %>
+<% gallery_photos = @photos.drop(1).first(6) %>
+<% if gallery_photos.any? %>
+  <section class="al-section al-fade-in">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="font-display text-al-primary text-4xl font-bold mb-12 text-center">Galerie</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <% gallery_photos.each_with_index do |photo, index| %>
+          <% if photo.image.attached? %>
+            <div class="group al-card al-card-light overflow-hidden cursor-pointer" style="animation: fadeInUp #{0.1 * (index + 1)}s ease-out;">
+              <div class="relative overflow-hidden rounded-al-lg h-64">
+                <%= image_tag photo.image,
+                      class: "w-full h-full object-cover transition-transform duration-500 group-hover:scale-105",
+                      alt: photo.title.presence || "Photo Al Toupi" %>
+              </div>
+              <div class="p-4">
+                <% if photo.title.present? %>
+                  <p class="text-sm font-semibold text-al-primary"><%= photo.title %></p>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="text-center mt-12">
+        <%= link_to "Voir toute la galerie →", gallery_path, 
+              class: "al-btn al-btn-primary font-semibold" %>
+      </div>
+    </div>
+  </section>
+<% end %>
+
+<%# == Horaires == %>
+<% horaires = setting_value("horaires") %>
+<% if horaires.present? %>
+  <section class="al-section al-section-accent al-fade-in">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="font-display text-al-primary text-4xl font-bold mb-8">Horaires d'ouverture</h2>
+      <div class="bg-white rounded-al-lg shadow-al-soft p-8 al-card">
+        <p class="text-al-text whitespace-pre-line text-lg font-light leading-relaxed">
+          <%= horaires %>
+        </p>
+      </div>
+    </div>
+  </section>
+<% end %>

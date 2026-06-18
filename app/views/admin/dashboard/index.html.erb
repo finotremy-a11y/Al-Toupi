@@ -1,0 +1,44 @@
+<div class="mb-12">
+  <h1 class="font-display text-al-primary text-4xl font-bold mb-2">Tableau de bord</h1>
+  <div class="w-16 h-1 bg-gradient-to-r from-al-primary to-al-secondary rounded-full"></div>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+  <%= link_to admin_photos_path, class: "al-card al-card-light hover:shadow-al-strong transition-all duration-300 text-center group cursor-pointer al-fade-in" do %>
+    <p class="text-5xl font-bold text-al-primary group-hover:scale-110 transition-transform duration-300">
+      <%= @photos_count %>
+    </p>
+    <p class="text-sm text-al-secondary font-semibold mt-3 uppercase tracking-wide">Galerie</p>
+  <% end %>
+
+  <%= link_to admin_dish_categories_path, class: "al-card al-card-light hover:shadow-al-strong transition-all duration-300 text-center group cursor-pointer al-fade-in", style: "animation-delay: 0.05s" do %>
+    <p class="text-5xl font-bold text-al-primary group-hover:scale-110 transition-transform duration-300">
+      <%= @dish_categories_count %>
+    </p>
+    <p class="text-sm text-al-secondary font-semibold mt-3 uppercase tracking-wide">Catégories</p>
+  <% end %>
+
+  <%= link_to admin_dishes_path, class: "al-card al-card-light hover:shadow-al-strong transition-all duration-300 text-center group cursor-pointer al-fade-in", style: "animation-delay: 0.1s" do %>
+    <p class="text-5xl font-bold text-al-primary group-hover:scale-110 transition-transform duration-300">
+      <%= @dishes_count %>
+    </p>
+    <p class="text-sm text-al-secondary font-semibold mt-3 uppercase tracking-wide">Plats</p>
+  <% end %>
+
+  <%= link_to admin_settings_path, class: "al-card al-card-light hover:shadow-al-strong transition-all duration-300 text-center group cursor-pointer al-fade-in", style: "animation-delay: 0.15s" do %>
+    <p class="text-5xl font-bold text-al-primary group-hover:scale-110 transition-transform duration-300">
+      <%= @settings_count %>
+    </p>
+    <p class="text-sm text-al-secondary font-semibold mt-3 uppercase tracking-wide">Paramètres</p>
+  <% end %>
+</div>
+
+<div class="al-card al-card-light shadow-al-soft">
+  <h2 class="font-display text-al-primary text-2xl font-bold mb-4">Accès rapide</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <%= link_to "➕ Ajouter une photo", new_admin_photo_path, class: "al-btn al-btn-primary w-full font-semibold" %>
+    <%= link_to "➕ Ajouter un plat", new_admin_dish_path, class: "al-btn al-btn-primary w-full font-semibold" %>
+    <%= link_to "✏️ Gérer les catégories", admin_dish_categories_path, class: "al-btn al-btn-secondary w-full font-semibold" %>
+    <%= link_to "⚙️ Configuration du site", admin_settings_path, class: "al-btn al-btn-secondary w-full font-semibold" %>
+  </div>
+</div>

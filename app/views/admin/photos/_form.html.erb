@@ -1,0 +1,44 @@
+<div class="al-card al-card-light shadow-al-medium max-w-3xl mx-auto">
+  <%= form_with model: [:admin, photo], class: "space-y-6" do |f| %>
+    <% if photo.errors.any? %>
+      <div class="al-alert al-alert-error">
+        <p class="font-semibold mb-2">Veuillez corriger les erreurs suivantes :</p>
+        <ul class="list-disc list-inside space-y-1 text-sm">
+          <% photo.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="al-form-group">
+      <%= f.label :title, "Titre" %>
+      <%= f.text_field :title, class: "al-input", placeholder: "Ex: Soirée dégustation" %>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="al-form-group mb-0">
+        <%= f.label :position, "Position" %>
+        <%= f.number_field :position, class: "al-input", placeholder: "1" %>
+      </div>
+
+      <div class="al-form-group mb-0">
+        <%= f.label :image, "Image" %>
+        <% if photo.image.attached? %>
+          <div class="mb-3 rounded-al overflow-hidden border-2 border-al-bg-medium shadow-al-soft">
+            <%= image_tag photo.image, class: "h-40 w-full object-cover" %>
+          </div>
+        <% end %>
+        <%= f.file_field :image, accept: "image/*", class: "w-full text-sm text-al-text/70 file:mr-4 file:py-2 file:px-4 file:rounded-al file:border-0 file:bg-al-bg-light file:text-al-primary file:font-semibold hover:file:bg-al-bg-medium" %>
+      </div>
+    </div>
+
+    <div class="al-divider"></div>
+
+    <div class="flex flex-col sm:flex-row gap-3 pt-1">
+      <%= f.submit photo.persisted? ? "Enregistrer" : "Ajouter",
+            class: "al-btn al-btn-primary px-6 py-3" %>
+      <%= link_to "Annuler", admin_photos_path, class: "al-btn al-btn-outline px-6 py-3" %>
+    </div>
+  <% end %>
+</div>
