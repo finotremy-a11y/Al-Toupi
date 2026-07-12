@@ -89,6 +89,8 @@ production:
     <<: *default
     database: altoupi_production
     username: altoupi
+    host: <%= ENV.fetch("DB_HOST", "127.0.0.1") %>
+    port: <%= ENV.fetch("DB_PORT", 5432) %>
     password: <%= ENV["ALTOUPI_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
