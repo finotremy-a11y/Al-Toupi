@@ -7,24 +7,18 @@
           alt: featured.title.presence || "Al Toupi" %>
   <% end %>
   <div class="absolute inset-0 bg-gradient-to-t from-al-primary/35 to-al-secondary/20"></div>
-  <div class="relative z-10 text-center px-4 max-w-2xl mx-auto al-fade-in">
-    <h1 class="text-5xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg al-brand-script">
-      Al Toupi
-    </h1>
-    <p class="text-xl md:text-2xl mb-8 text-white/95 font-light drop-shadow">
-      Restaurant traditionnel à Salles-Curan, Aveyron
-    </p>
-    <div class="flex gap-4 justify-center flex-wrap">
+  <div class="absolute inset-x-0 bottom-16 md:bottom-8 z-10 text-center px-4 max-w-2xl mx-auto al-fade-in">
+        <div class="flex flex-row gap-2 justify-center items-center py-3 md:hidden">
       <%= link_to "Découvrir la carte", menu_path,
-            class: "al-btn al-btn-light al-btn-lg font-semibold" %>
+          class: "al-btn al-btn-accent px-2 py-1 text-[11px] md:px-3 md:py-1.5 md:text-xs font-medium whitespace-nowrap" %>
       <%= link_to "Nous contacter", contact_path,
-            class: "al-btn al-btn-light al-btn-lg font-semibold shadow-al-medium ring-2 ring-white/30 hover:shadow-al-strong" %>
+          class: "al-btn al-btn-accent px-2 py-1 text-[11px] md:px-3 md:py-1.5 md:text-xs font-medium whitespace-nowrap shadow-al-medium ring-2 ring-white/30 hover:shadow-al-strong" %>
     </div>
   </div>
 </section>
 
 <%# == Présentation == %>
-<section class="al-section al-section-light al-fade-in">
+<section class="al-section al-section-accent al-fade-in">
   <div class="max-w-3xl mx-auto text-center">
     <h2 class="font-display text-al-primary text-4xl md:text-5xl font-bold mb-6">Bienvenue</h2>
     <p class="text-al-text text-lg leading-relaxed font-light">
@@ -42,7 +36,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <% gallery_photos.each_with_index do |photo, index| %>
           <% if photo.image.attached? %>
-            <div class="group al-card al-card-light overflow-hidden cursor-pointer" style="animation: fadeInUp #{0.1 * (index + 1)}s ease-out;">
+            <div class="group al-card al-card-accent-surface overflow-hidden cursor-pointer" style="animation: fadeInUp #{0.1 * (index + 1)}s ease-out;">
               <div class="relative overflow-hidden rounded-al-lg h-64">
                 <%= image_tag photo.image,
                       class: "w-full h-full object-cover transition-transform duration-500 group-hover:scale-105",

@@ -1,0 +1,22 @@
+[Unit]
+Description=Puma HTTP Server for Al Toupi
+After=network.target
+
+[Service]
+Type=simple
+User=deploy
+Group=deploy
+WorkingDirectory=/var/www/altoupi/current
+Environment=HOME=/home/deploy
+Environment=RAILS_ENV=production
+EnvironmentFile=/var/www/altoupi/shared/config/.env.production
+ExecStart=/bin/bash -lc 'source /etc/profile.d/rbenv.sh && bundle exec puma -C config/puma.rb -e production --bind unix:///var/www/altoupi/shared/tmp/sockets/puma.sock --pidfile /var/www/altoupi/shared/tmp/pids/puma.pid'
+ExecReload=/bin/kill -USR1 $MAINPID
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/www/altoupi/shared/log/puma.stdout.log
+StandardError=append:/var/www/altoupi/shared/log/puma.stderr.log
+SyslogIdentifier=puma-altoupi
+
+[Install]
+WantedBy=multi-user.target

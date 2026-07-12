@@ -9,14 +9,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Design System Al Toupi - Palette Terroir Premium
-        'al-primary': '#3A5F3A',      // Vert profond - titres, accents primaires
-        'al-primary-medium': '#4F7A4F', // Vert moyen - interactions
-        'al-primary-light': '#7FAF7F',  // Vert clair - hover states, backgrounds
-        'al-secondary': '#8B5E3C',    // Marron chaud - accents, sous-titres
-        'al-secondary-dark': '#6B4226', // Marron foncé - borders, accents forts
-        'al-bg-light': '#F5E9D3',     // Beige clair - sections, cards backgrounds
-        'al-bg-medium': '#E8D4B8',    // Beige moyen - accents, borders
+        // Design System Al Toupi - Palette Bleu / Marron (test client)
+        'al-primary': '#007F92',      // Bleu principal encore plus vif
+        'al-primary-medium': '#00A3BC', // Bleu interactions accentué
+        'al-primary-light': '#66D8E6',  // Bleu clair lumineux
+        'al-secondary': '#6A4A32',    // Marron principal demandé
+        'al-secondary-dark': '#4F3725', // Marron foncé
+        'al-accent': '#FF8F7A',       // Accent saumon plus intense
+        'al-bg-light': '#F9DDBE',     // Beige clair plus lumineux
+        'al-bg-medium': '#F0BF8E',    // Beige moyen plus dense
         'al-text-dark': '#1A1A1A',    // Noir - texte principal
         'al-text': '#2E2E2E',         // Anthracite - texte secondaire
         'al-bg': '#FAF7F2',           // Blanc cassé - fond global

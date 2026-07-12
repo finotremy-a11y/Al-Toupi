@@ -7,13 +7,14 @@
 /* === CSS VARIABLES === */
 :root {
   /* Couleurs */
-  --al-primary: #3A5F3A;
-  --al-primary-medium: #4F7A4F;
-  --al-primary-light: #7FAF7F;
-  --al-secondary: #8B5E3C;
-  --al-secondary-dark: #6B4226;
-  --al-bg-light: #F5E9D3;
-  --al-bg-medium: #E8D4B8;
+  --al-primary: #007F92;
+  --al-primary-medium: #00A3BC;
+  --al-primary-light: #66D8E6;
+  --al-secondary: #6A4A32;
+  --al-secondary-dark: #4F3725;
+  --al-accent: #FF8F7A;
+  --al-bg-light: #F9DDBE;
+  --al-bg-medium: #F0BF8E;
   --al-text-dark: #1A1A1A;
   --al-text: #2E2E2E;
   --al-bg: #FAF7F2;
@@ -120,22 +121,24 @@ a:hover {
 }
 
 .al-btn-primary {
-  background-color: var(--al-primary);
+  background: linear-gradient(135deg, var(--al-primary) 0%, var(--al-primary-medium) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
 }
 
 .al-btn-primary:hover {
-  background-color: var(--al-primary-medium);
+  background: linear-gradient(135deg, var(--al-primary-medium) 0%, var(--al-primary-light) 100%);
   box-shadow: var(--shadow-medium);
 }
 
 .al-btn-secondary {
-  background-color: var(--al-secondary);
+  background: linear-gradient(135deg, var(--al-secondary) 0%, var(--al-accent) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
 }
 
 .al-btn-secondary:hover {
-  background-color: var(--al-secondary-dark);
+  background: linear-gradient(135deg, var(--al-secondary-dark) 0%, var(--al-accent) 100%);
   box-shadow: var(--shadow-medium);
 }
 
@@ -157,6 +160,17 @@ a:hover {
 
 .al-btn-light:hover {
   background-color: var(--al-bg-medium);
+}
+
+.al-btn-accent {
+  background-color: var(--al-bg-medium);
+  color: var(--al-secondary-dark);
+  border: 2px solid color-mix(in srgb, var(--al-accent) 70%, var(--al-bg-medium));
+}
+
+.al-btn-accent:hover {
+  background-color: color-mix(in srgb, var(--al-accent) 35%, var(--al-bg-medium));
+  color: var(--al-secondary-dark);
 }
 
 .al-btn-lg {
@@ -191,40 +205,66 @@ a:hover {
   border: 2px solid var(--al-bg-medium);
 }
 
+.al-card-accent-surface {
+  background-color: var(--al-bg-medium);
+}
+
+.al-border-accent {
+  border-color: color-mix(in srgb, var(--al-accent) 70%, var(--al-bg-medium));
+}
+
 /* === HEADERS & FOOTERS === */
 .al-header {
-  background-color: white;
-  border-bottom: 1px solid var(--al-bg-medium);
-  box-shadow: var(--shadow-soft);
+  background: linear-gradient(90deg, #006f83 0%, var(--al-primary) 45%, var(--al-primary-medium) 100%);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.24);
+  box-shadow: var(--shadow-medium);
   position: sticky;
   top: 0;
   z-index: 40;
 }
 
+.al-header a {
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.al-header a:hover {
+  color: #ffffff;
+}
+
+.al-header #mobile-menu a {
+  color: var(--al-text) !important;
+}
+
+.al-header #mobile-menu a:hover,
+.al-header #mobile-menu a.active {
+  color: var(--al-primary) !important;
+}
+
 .al-footer {
-  background-color: var(--al-text-dark);
-  color: #f1f5f9;
+  background: var(--al-bg-medium);
+  color: var(--al-secondary-dark);
   margin-top: var(--spacing-2xl);
+  border-top: 2px solid rgba(79, 55, 37, 0.2);
 }
 
 .al-footer p,
 .al-footer li,
 .al-footer span {
-  color: #f1f5f9;
+  color: var(--al-secondary-dark);
 }
 
 .al-footer a {
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--al-secondary-dark);
 }
 
 .al-footer a:hover {
-  color: #ffffff;
+  color: var(--al-primary);
   text-decoration: underline;
 }
 
 .al-footer-title {
   font-family: var(--font-display);
-  color: white;
+  color: var(--al-primary);
   font-size: 1.25rem;
   margin-bottom: var(--spacing-sm);
 }
@@ -302,7 +342,7 @@ a:hover {
 
 .al-nav a {
   font-weight: 600;
-  color: var(--al-text);
+  color: rgba(255, 255, 255, 0.9);
   border-bottom: 2px solid transparent;
   padding-bottom: 0.25rem;
   transition: all 0.3s ease;
@@ -310,20 +350,20 @@ a:hover {
 
 .al-nav a:hover,
 .al-nav a.active {
-  color: var(--al-primary);
-  border-bottom-color: var(--al-primary);
+  color: #ffffff;
+  border-bottom-color: var(--al-accent);
 }
 
 .al-hamburger-btn {
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 999px;
-  border: 2px solid var(--al-bg-medium);
+  border: 2px solid rgba(255, 255, 255, 0.35);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #ffffff 0%, var(--al-bg-light) 100%);
-  color: var(--al-primary);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
   box-shadow: var(--shadow-soft);
   transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
@@ -331,11 +371,12 @@ a:hover {
 .al-hamburger-btn:hover {
   transform: translateY(-1px);
   box-shadow: var(--shadow-medium);
-  border-color: var(--al-primary-light);
+  border-color: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .al-hamburger-btn:focus-visible {
-  outline: 2px solid rgba(58, 95, 58, 0.28);
+  outline: 2px solid rgba(255, 255, 255, 0.45);
   outline-offset: 2px;
 }
 
@@ -351,7 +392,7 @@ a:hover {
   left: 0;
   display: block;
   height: 2px;
-  background: linear-gradient(90deg, var(--al-primary), var(--al-secondary));
+  background: #ffffff;
   border-radius: 99px;
   transition: transform 0.25s ease, opacity 0.2s ease, width 0.2s ease;
 }
@@ -372,7 +413,7 @@ a:hover {
 }
 
 .al-hamburger-btn[aria-expanded="true"] {
-  border-color: var(--al-primary-light);
+  border-color: rgba(255, 255, 255, 0.72);
   box-shadow: var(--shadow-medium);
 }
 

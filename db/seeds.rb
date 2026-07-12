@@ -12,8 +12,8 @@ AdminUser.destroy_all
 puts "Création de l'admin..."
 AdminUser.create!(
   email: "admin@altoupi.fr",
-  password: "admin1234",
-  password_confirmation: "admin1234"
+  password: "Altoupb1226",
+  password_confirmation: "Altoupb1226"
 )
 
 # ---- Settings ----
@@ -55,4 +55,4 @@ desserts = DishCategory.create!(name: "Desserts", position: 3)
 ].each { |d| Dish.create!(d) }
 
 puts "Seeds terminées !"
-puts "  Admin : admin@altoupi.fr / admin1234"
+puts "  Admin : admin@altoupi.fr / Altoupb1226"

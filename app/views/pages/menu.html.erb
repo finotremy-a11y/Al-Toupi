@@ -8,13 +8,15 @@
 
     <% menu_intro = setting_value("menu_intro") %>
     <% if menu_intro.present? %>
-      <p class="text-center text-al-text text-lg mb-12 max-w-2xl mx-auto font-light leading-relaxed">
-        <%= menu_intro %>
-      </p>
+      <div class="mb-12 flex flex-col items-center text-center">
+        <p class="w-full max-w-2xl text-al-text text-lg font-light leading-relaxed">
+          <%= menu_intro %>
+        </p>
+      </div>
     <% end %>
 
     <% if @menu_card&.file&.attached? %>
-      <div class="al-card al-card-light shadow-al-medium">
+      <div class="al-card al-card-accent-surface shadow-al-medium">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
           <h2 class="font-display text-al-primary text-3xl font-bold"><%= @menu_card.title %></h2>
           <%= link_to "Télécharger la carte", url_for(@menu_card.file),
@@ -24,13 +26,13 @@
         </div>
 
         <% if @menu_card.image? %>
-          <div class="rounded-al-lg overflow-hidden border border-al-bg-medium bg-white">
+          <div class="rounded-al-lg overflow-hidden bg-white">
             <%= image_tag @menu_card.file,
                   class: "w-full h-auto",
                   alt: @menu_card.title %>
           </div>
         <% else %>
-          <div class="rounded-al-lg overflow-hidden border border-al-bg-medium bg-white" style="min-height: 60vh;">
+          <div class="rounded-al-lg overflow-hidden bg-white" style="min-height: 60vh;">
             <iframe
               src="<%= url_for(@menu_card.file) %>"
               class="w-full h-[70vh] min-h-[28rem] border-0"

@@ -203,7 +203,7 @@ bundle exec puma -e production
 ```
 
 ### Health check
-Un endpoint santé est disponible à `/health` pour les load balancers.
+Un endpoint santé est disponible à `/up` pour les load balancers. L'affichage d'un écran vert sur cette URL est normal et indique que l'application répond correctement.
 
 ## 📊 Architecture
 

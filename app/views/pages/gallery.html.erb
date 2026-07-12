@@ -4,9 +4,11 @@
     <div class="text-center mb-16 al-fade-in">
       <h1 class="font-display text-al-primary text-5xl md:text-6xl font-bold mb-4">Galerie</h1>
       <div class="w-24 h-1 bg-gradient-to-r from-al-primary to-al-secondary mx-auto rounded-full mb-6"></div>
-      <p class="text-al-text text-lg font-light max-w-2xl mx-auto">
-        Découvrez les plus beaux moments de nos services et l'ambiance chaleureuse de notre restaurant
-      </p>
+      <div class="flex flex-col items-center text-center">
+        <p class="w-full max-w-2xl text-al-text text-lg font-light">
+          Découvrez les plus beaux moments de nos services et l'ambiance chaleureuse de notre restaurant
+        </p>
+      </div>
     </div>
 
     <% if @photos.empty? %>
@@ -16,7 +18,7 @@
       <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
         <% @photos.each_with_index do |photo, idx| %>
           <% if photo.image.attached? %>
-            <div class="break-inside-avoid group al-card overflow-hidden shadow-al-soft hover:shadow-al-medium transition-all duration-300 al-fade-in" style="animation-delay: #{idx * 0.05}s">
+            <div class="break-inside-avoid group al-card al-card-accent-surface overflow-hidden shadow-al-soft hover:shadow-al-medium transition-all duration-300 al-fade-in" style="animation-delay: #{idx * 0.05}s">
               <div class="relative overflow-hidden rounded-al-lg">
                 <%= image_tag photo.image,
                       class: "w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105",
