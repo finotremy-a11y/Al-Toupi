@@ -2,7 +2,7 @@
 /* Palette Terroir Premium - Vert, Beige, Marron */
 
 /* === IMPORTS === */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* === CSS VARIABLES === */
 :root {
@@ -23,6 +23,7 @@
   --font-display: 'Cormorant Garamond', serif;
   --font-brand: 'Great Vibes', cursive;
   --font-body: 'Inter', system-ui, sans-serif;
+  --font-body-public: 'Alex Brush', cursive;
 
   /* Espacements */
   --spacing-xs: 0.5rem;
@@ -56,6 +57,76 @@ body {
   background-color: var(--al-bg);
   color: var(--al-text);
   line-height: 1.6;
+}
+
+.al-public-site {
+  --font-body: var(--font-body-public);
+  font-family: var(--font-body-public);
+  font-size: 1.375rem;
+  line-height: 1.95;
+}
+
+.al-public-site :where(p, li, label, input, textarea, select, button) {
+  font-size: 1.375rem;
+}
+
+.al-public-site :where(h1, h2, h3, h4, h5, h6, p, a, li, span, button, label, input, textarea, select) {
+  font-family: var(--font-body-public);
+}
+
+.al-public-site .font-display,
+.al-public-site h1,
+.al-public-site h2,
+.al-public-site h3,
+.al-public-site h4,
+.al-public-site h5,
+.al-public-site h6,
+.al-public-site .al-footer-title {
+  font-family: var(--font-body-public);
+}
+
+.al-public-site .al-brand-script,
+.al-public-site .al-main-title {
+  font-family: var(--font-brand);
+}
+
+.al-public-site .al-nav a,
+.al-public-site .al-btn,
+.al-public-site .al-form-group label,
+.al-public-site .al-table,
+.al-public-site .al-badge {
+  font-size: 1.3125rem;
+}
+
+.al-public-site h1 {
+  font-size: 3.8rem;
+  line-height: 1.15;
+}
+
+.al-public-site h2 {
+  font-size: 3rem;
+  line-height: 1.18;
+}
+
+.al-public-site h3 {
+  font-size: 2.45rem;
+  line-height: 1.22;
+}
+
+.al-public-site .text-xs {
+  font-size: 1.125rem;
+}
+
+.al-public-site .text-sm {
+  font-size: 1.25rem;
+}
+
+.al-public-site .text-base {
+  font-size: 1.375rem;
+}
+
+.al-public-site .text-lg {
+  font-size: 1.5rem;
 }
 
 /* === TYPOGRAPHIES === */

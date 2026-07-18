@@ -9,10 +9,10 @@
   <div class="absolute inset-0 bg-gradient-to-t from-al-primary/35 to-al-secondary/20"></div>
   <div class="absolute inset-x-0 bottom-16 md:bottom-8 z-10 text-center px-4 max-w-2xl mx-auto al-fade-in">
         <div class="flex flex-row gap-2 justify-center items-center py-3 md:hidden">
-      <%= link_to "Découvrir la carte", menu_path,
-          class: "al-btn al-btn-accent px-2 py-1 text-[11px] md:px-3 md:py-1.5 md:text-xs font-medium whitespace-nowrap" %>
+        <%= link_to "Découvrir la carte", menu_path,
+          class: "al-btn al-btn-accent px-3 py-2 text-sm font-medium whitespace-nowrap" %>
       <%= link_to "Nous contacter", contact_path,
-          class: "al-btn al-btn-accent px-2 py-1 text-[11px] md:px-3 md:py-1.5 md:text-xs font-medium whitespace-nowrap shadow-al-medium ring-2 ring-white/30 hover:shadow-al-strong" %>
+          class: "al-btn al-btn-accent px-3 py-2 text-sm font-medium whitespace-nowrap shadow-al-medium ring-2 ring-white/30 hover:shadow-al-strong" %>
     </div>
   </div>
 </section>
@@ -44,7 +44,7 @@
               </div>
               <div class="p-4">
                 <% if photo.title.present? %>
-                  <p class="text-sm font-semibold text-al-primary"><%= photo.title %></p>
+                  <p class="text-base font-semibold text-al-primary"><%= photo.title %></p>
                 <% end %>
               </div>
             </div>

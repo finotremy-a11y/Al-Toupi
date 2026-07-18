@@ -16,7 +16,7 @@
         <% adresse = setting_value("adresse") %>
         <% if adresse.present? %>
           <div class="mb-8">
-            <h3 class="text-xs uppercase tracking-widest font-bold text-al-secondary mb-3">📍 Adresse</h3>
+            <p class="text-sm uppercase tracking-[0.18em] font-bold text-al-secondary mb-3">📍 Adresse</p>
             <p class="text-al-text whitespace-pre-line font-light text-lg">
               <%= adresse %>
             </p>
@@ -26,7 +26,7 @@
         <% telephone = setting_value("telephone") %>
         <% if telephone.present? %>
           <div class="mb-8">
-            <h3 class="text-xs uppercase tracking-widest font-bold text-al-secondary mb-3">☎️ Téléphone</h3>
+            <p class="text-sm uppercase tracking-[0.18em] font-bold text-al-secondary mb-3">☎️ Téléphone</p>
             <p>
               <%= link_to telephone, "tel:#{telephone.gsub(/\s/, '')}", 
                     class: "text-al-primary hover:text-al-primary-medium font-semibold text-lg underline transition-colors" %>
@@ -37,7 +37,7 @@
         <% email_val = setting_value("email") %>
         <% if email_val.present? %>
           <div class="mb-8">
-            <h3 class="text-xs uppercase tracking-widest font-bold text-al-secondary mb-3">✉️ Email</h3>
+            <p class="text-sm uppercase tracking-[0.18em] font-bold text-al-secondary mb-3">✉️ Email</p>
             <p>
               <%= mail_to email_val, email_val, 
                     class: "text-al-primary hover:text-al-primary-medium font-semibold text-lg underline transition-colors" %>
@@ -48,7 +48,7 @@
         <% horaires = setting_value("horaires") %>
         <% if horaires.present? %>
           <div class="pt-4 border-t-2 border-al-bg-medium">
-            <h3 class="text-xs uppercase tracking-widest font-bold text-al-secondary mb-3">🕐 Horaires</h3>
+            <p class="text-sm uppercase tracking-[0.18em] font-bold text-al-secondary mb-3">🕐 Horaires</p>
             <p class="text-al-text whitespace-pre-line font-light text-lg">
               <%= horaires %>
             </p>

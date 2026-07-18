@@ -19,7 +19,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-al-bg text-al-text font-sans">
+  <body class="al-public-site bg-al-bg text-al-text">
 
     <%# == Navigation == %>
     <header class="al-header" data-controller="mobile-nav" data-action="keydown.esc@window->mobile-nav#closeOnEscape click@window->mobile-nav#closeOnOutsideClick">
@@ -110,8 +110,8 @@
 
       <div class="border-t border-al-secondary/30">
         <div class="max-w-5xl mx-auto px-4 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-          <p class="text-xs md:text-sm text-al-secondary-dark/90">&copy; <%= Date.current.year %> Al Toupi - Restaurant traditionnel</p>
-          <nav class="flex flex-wrap gap-4 text-xs md:text-sm">
+          <p class="text-sm md:text-base text-al-secondary-dark/90">&copy; <%= Date.current.year %> Al Toupi - Restaurant traditionnel</p>
+          <nav class="flex flex-wrap gap-4 text-sm md:text-base">
             <%= link_to "Mentions légales", legal_mentions_path, class: "text-al-secondary-dark hover:text-al-primary" %>
             <%= link_to "Politique de confidentialité", privacy_policy_path, class: "text-al-secondary-dark hover:text-al-primary" %>
             <%= link_to "Politique cookies", cookies_policy_path, class: "text-al-secondary-dark hover:text-al-primary" %>
