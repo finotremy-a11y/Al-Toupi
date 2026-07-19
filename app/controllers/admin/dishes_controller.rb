@@ -12,6 +12,14 @@ class Admin::DishesController < Admin::BaseController
 
   def create
     @dish = Dish.new(dish_params)
+    apply_photo_only_defaults(@dish)
+
+    unless @dish.photo.attached?
+      @dish.errors.add(:photo, "doit être ajoutée")
+      @dish_categories = DishCategory.ordered
+      return render :new, status: :unprocessable_entity
+    end
+
     if @dish.save
       redirect_to admin_dishes_path, notice: "Plat ajouté avec succès."
     else
@@ -25,6 +33,7 @@ class Admin::DishesController < Admin::BaseController
   end
 
   def update
+    apply_photo_only_defaults(@dish)
     if @dish.update(dish_params)
       redirect_to admin_dishes_path, notice: "Plat mis à jour."
     else
@@ -45,6 +54,13 @@ class Admin::DishesController < Admin::BaseController
   end
 
   def dish_params
-    params.require(:dish).permit(:name, :description, :price, :position, :dish_category_id, :photo)
+    params.require(:dish).permit(:position, :dish_category_id, :photo)
+  end
+
+  def apply_photo_only_defaults(dish)
+    return if dish.persisted?
+
+    dish.name = "Carte #{Time.current.to_i}" if dish.name.blank?
+    dish.price = 0.01 if dish.price.blank?
   end
 end

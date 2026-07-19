@@ -16,15 +16,15 @@ RSpec.describe "PagesController", type: :request do
   end
 
   describe "GET /carte" do
-    it "renders categories and dishes" do
+    it "renders categories and dish photos" do
       category = create(:dish_category, name: "Desserts")
-      create(:dish, dish_category: category, name: "Tarte", description: "Maison", price: 6.5)
+      create(:dish, :with_photo, dish_category: category, name: "Tarte", description: "Maison", price: 6.5)
 
       get menu_path
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("Desserts")
-      expect(response.body).to include("Tarte")
+      expect(response.body).to include("Carte Desserts")
     end
 
     it "renders uploaded menu card when available" do
@@ -37,6 +37,28 @@ RSpec.describe "PagesController", type: :request do
       expect(response.body).to include("Carte photo")
       expect(response.body).to include("Télécharger la carte")
       expect(response.body).not_to include("Desserts")
+    end
+  end
+
+  describe "GET /boissons" do
+    it "renders drink categories and photos" do
+      drinks_category = create(:dish_category, :drinks, name: "Boissons fraîches")
+      create(:dish, :with_photo, dish_category: drinks_category)
+
+      get drinks_path
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Nos Boissons")
+      expect(response.body).to include("Boissons fraîches")
+    end
+
+    it "renders empty-state when there are no drink categories" do
+      create(:dish_category, name: "Desserts", category_type: :menu)
+
+      get drinks_path
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Aucune catégorie boisson")
     end
   end
 

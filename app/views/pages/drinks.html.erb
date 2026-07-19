@@ -1,0 +1,41 @@
+<%# == Nos Boissons == %>
+<section class="al-section-lg">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 al-fade-in">
+      <h1 class="font-display text-al-primary text-5xl md:text-6xl font-bold mb-4">Nos Boissons</h1>
+      <div class="w-24 h-1 bg-gradient-to-r from-al-primary to-al-secondary mx-auto rounded-full mb-6"></div>
+      <p class="w-full max-w-2xl mx-auto text-al-text text-lg font-light leading-relaxed">
+        Découvrez la sélection de boissons disponibles au restaurant.
+      </p>
+    </div>
+
+    <% if @drink_categories.empty? %>
+      <p class="text-center text-al-text/60 py-12">Aucune catégorie boisson n'est disponible pour le moment.</p>
+    <% else %>
+      <% @drink_categories.each_with_index do |category, cat_index| %>
+        <div class="mb-16 al-fade-in" style="animation-delay: #{cat_index * 0.1}s">
+          <h2 class="font-display text-al-primary text-4xl font-bold border-b-2 border-al-secondary pb-4 mb-8">
+            <%= category.name %>
+          </h2>
+
+          <% photo_dishes = category.dishes.ordered.select { |dish| dish.photo.attached? } %>
+          <% if photo_dishes.any? %>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <% photo_dishes.each_with_index do |dish, idx| %>
+                <div class="al-card hover:shadow-al-strong transition-all duration-300 al-slide-in" style="animation-delay: #{(cat_index * 0.1) + (idx * 0.05)}s">
+                  <div class="overflow-hidden rounded-al-lg">
+                    <%= image_tag dish.photo,
+                          class: "w-full h-64 object-cover transition-transform duration-500 hover:scale-105",
+                          alt: "Boisson #{category.name}" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <p class="text-al-text/60 italic">Aucune photo disponible dans cette catégorie pour le moment.</p>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</section>

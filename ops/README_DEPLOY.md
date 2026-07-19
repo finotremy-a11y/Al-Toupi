@@ -9,6 +9,52 @@ This folder contains production deployment automation for a VM/server accessible
 - `ops/systemd/puma-altoupi.service`: Puma systemd service template.
 - `ops/deploy_altoupi.sh`: full app deployment script.
 - `ops/run_quality_checks.sh`: RSpec + RuboCop + Brakeman + Bundler Audit.
+- `ops/backup_prod_data.sh`: production backup (PostgreSQL dumps + shared storage/config).
+
+## Zero-loss deployment checklist
+
+Before every production deploy, always take a backup from the server.
+
+### A) Backup data/files on the server (run as your sudo user)
+
+```bash
+cd /var/www/altoupi/repo
+sudo -E bash ops/backup_prod_data.sh
+```
+
+This backup includes:
+- PostgreSQL dumps for `altoupi_production`, `altoupi_production_cache`, `altoupi_production_queue`, `altoupi_production_cable`
+- Uploaded files from `/var/www/altoupi/shared/storage`
+- App shared config from `/var/www/altoupi/shared/config`
+
+Optional: download backup locally
+
+```bash
+scp -r deploy@YOUR_SERVER_IP:/var/www/altoupi/backups/<TIMESTAMP> ./prod-backup-<TIMESTAMP>
+```
+
+### B) Push code changes
+
+From local machine:
+
+```bash
+git add .
+git commit -m "Your deploy message"
+git push origin main
+```
+
+### C) Deploy safely on server
+
+```bash
+cd /var/www/altoupi/repo
+sudo -E APP_NAME=altoupi \
+APP_DIR=/var/www/altoupi \
+BRANCH=main \
+SYNC_ADMIN_PASSWORD=false \
+bash ops/deploy_altoupi.sh
+```
+
+`SYNC_ADMIN_PASSWORD=false` avoids resetting the admin password unexpectedly.
 
 ## 1) Provision the server (run as root)
 
@@ -61,10 +107,10 @@ sudo systemctl daemon-reload
 sudo systemctl enable puma-altoupi
 ```
 
-## 4) Deploy app (run as deploy user)
+## 4) Deploy app (run as your sudo user)
 
 ```bash
-APP_NAME=altoupi \
+sudo -E APP_NAME=altoupi \
 APP_DIR=/var/www/altoupi \
 BRANCH=main \
 SYNC_ADMIN_PASSWORD=true \

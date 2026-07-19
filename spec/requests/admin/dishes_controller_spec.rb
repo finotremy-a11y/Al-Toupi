@@ -26,18 +26,15 @@ RSpec.describe "Admin::DishesController", type: :request do
       get admin_dishes_path
 
       expect(response).to have_http_status(:ok)
-      expect(response.body).to include("Plats du menu")
-      expect(response.body).to include("Boeuf")
+      expect(response.body).to include("Visuels de la carte")
+      expect(response.body).to include("Plats")
     end
 
-    it "creates a dish with photo upload and redirects with flash" do
+    it "creates a dish with only category, photo and position" do
       expect do
         post admin_dishes_path, params: {
           dish: {
             dish_category_id: category.id,
-            name: "Couscous",
-            description: "Semoule fine",
-            price: "15.50",
             position: 1,
             photo: fixture_upload
           }
@@ -48,10 +45,19 @@ RSpec.describe "Admin::DishesController", type: :request do
       follow_redirect!
       expect(response.body).to include("Plat ajouté avec succès.")
       expect(Dish.last.photo).to be_attached
+      expect(Dish.last.price.to_f).to eq(0.01)
+      expect(Dish.last.name).to start_with("Carte")
     end
 
     it "renders new on invalid create" do
-      post admin_dishes_path, params: { dish: { name: "", price: "", dish_category_id: nil } }
+      post admin_dishes_path, params: { dish: { dish_category_id: nil, photo: fixture_upload } }
+
+      expect(response).to have_http_status(:unprocessable_content)
+      expect(response.body).to include("Veuillez corriger les erreurs")
+    end
+
+    it "renders new on create without photo" do
+      post admin_dishes_path, params: { dish: { dish_category_id: category.id, position: 1 } }
 
       expect(response).to have_http_status(:unprocessable_content)
       expect(response.body).to include("Veuillez corriger les erreurs")
@@ -62,9 +68,6 @@ RSpec.describe "Admin::DishesController", type: :request do
 
       patch admin_dish_path(dish), params: {
         dish: {
-          name: "Apres",
-          description: "Mise a jour",
-          price: "18.90",
           position: 4,
           dish_category_id: category.id,
           created_at: 10.years.ago
@@ -72,9 +75,7 @@ RSpec.describe "Admin::DishesController", type: :request do
       }
 
       expect(response).to redirect_to(admin_dishes_path)
-      expect(dish.reload.name).to eq("Apres")
-      expect(dish.description).to eq("Mise a jour")
-      expect(dish.price.to_f).to eq(18.9)
+      expect(dish.reload.position).to eq(4)
       expect(dish.created_at).to be > 1.year.ago
     end
 

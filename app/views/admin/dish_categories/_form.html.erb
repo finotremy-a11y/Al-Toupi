@@ -17,6 +17,14 @@
     </div>
 
     <div class="al-form-group">
+      <%= f.label :category_type, "Type" %>
+      <%= f.select :category_type,
+            options_for_select([["Carte", "menu"], ["Boissons", "drinks"]], dish_category.category_type || "menu"),
+            {},
+            class: "al-select" %>
+    </div>
+
+    <div class="al-form-group">
       <%= f.label :position, "Position" %>
       <%= f.number_field :position, class: "al-input", placeholder: "1" %>
     </div>

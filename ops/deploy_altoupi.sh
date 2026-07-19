@@ -15,7 +15,25 @@ ADMIN_EMAIL="${ADMIN_EMAIL:-admin@altoupi.fr}"
 ADMIN_PASSWORD="${ADMIN_PASSWORD:-Altoupb1226}"
 
 if [[ "$EUID" -eq 0 ]]; then
-  echo "ERROR: run this script as deploy user, not root."
+  if [[ -n "${SUDO_USER:-}" && "${SUDO_USER}" != "root" ]]; then
+    echo "INFO: script started as root via sudo, switching to ${SUDO_USER}."
+    exec sudo -iu "$SUDO_USER" \
+      APP_NAME="$APP_NAME" \
+      APP_DIR="$APP_DIR" \
+      REPO_DIR="$REPO_DIR" \
+      RELEASES_DIR="$RELEASES_DIR" \
+      SHARED_DIR="$SHARED_DIR" \
+      CURRENT_LINK="$CURRENT_LINK" \
+      BRANCH="$BRANCH" \
+      KEEP_RELEASES="$KEEP_RELEASES" \
+      RUN_CHECKS="$RUN_CHECKS" \
+      SYNC_ADMIN_PASSWORD="$SYNC_ADMIN_PASSWORD" \
+      ADMIN_EMAIL="$ADMIN_EMAIL" \
+      ADMIN_PASSWORD="$ADMIN_PASSWORD" \
+      bash "$0"
+  fi
+
+  echo "ERROR: do not run as root directly. Run as a sudo-enabled user."
   exit 1
 fi
 

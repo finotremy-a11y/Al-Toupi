@@ -19,36 +19,20 @@
             class: "al-select" %>
     </div>
 
-    <div class="al-form-group">
-      <%= f.label :name, "Nom" %>
-      <%= f.text_field :name, required: true, class: "al-input", placeholder: "Ex: Couscous royal" %>
-    </div>
-
-    <div class="al-form-group">
-      <%= f.label :description, "Description" %>
-      <%= f.text_area :description, rows: 4, class: "al-textarea", placeholder: "Décrivez le plat, les saveurs, les ingrédients..." %>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="al-form-group mb-0">
-        <%= f.label :price, "Prix (€)" %>
-        <%= f.number_field :price, required: true, step: "0.01", min: "0", class: "al-input", placeholder: "12.50" %>
-      </div>
-
-      <div class="al-form-group mb-0">
-        <%= f.label :position, "Position" %>
-        <%= f.number_field :position, class: "al-input", placeholder: "1" %>
-      </div>
+    <div class="al-form-group mb-0">
+      <%= f.label :position, "Position" %>
+      <%= f.number_field :position, class: "al-input", placeholder: "1" %>
     </div>
 
     <div class="al-form-group">
       <%= f.label :photo, "Photo du plat" %>
-      <% if dish.photo.attached? %>
+      <% if dish.persisted? && dish.photo.attached? %>
         <div class="mb-3 rounded-al overflow-hidden border-2 border-al-bg-medium shadow-al-soft">
           <%= image_tag dish.photo, class: "h-40 w-full object-cover" %>
         </div>
       <% end %>
-      <%= f.file_field :photo, accept: "image/*", class: "w-full text-sm text-al-text/70 file:mr-4 file:py-2 file:px-4 file:rounded-al file:border-0 file:bg-al-bg-light file:text-al-primary file:font-semibold hover:file:bg-al-bg-medium" %>
+      <%= f.file_field :photo, required: dish.new_record?, accept: "image/*", class: "w-full text-sm text-al-text/70 file:mr-4 file:py-2 file:px-4 file:rounded-al file:border-0 file:bg-al-bg-light file:text-al-primary file:font-semibold hover:file:bg-al-bg-medium" %>
+      <p class="mt-2 text-sm text-al-text/65">Un seul visuel est requis. Aucun texte ni prix n'est demandé.</p>
     </div>
 
     <div class="al-divider"></div>

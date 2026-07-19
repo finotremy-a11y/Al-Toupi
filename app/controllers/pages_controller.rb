@@ -5,7 +5,11 @@ class PagesController < ApplicationController
 
   def menu
     @menu_card = MenuCard.first
-    @categories = DishCategory.ordered.includes(dishes: { photo_attachment: :blob })
+    @categories = DishCategory.menu.ordered.includes(dishes: { photo_attachment: :blob })
+  end
+
+  def drinks
+    @drink_categories = DishCategory.drinks.ordered.includes(dishes: { photo_attachment: :blob })
   end
 
   def gallery

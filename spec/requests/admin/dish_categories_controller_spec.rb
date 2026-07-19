@@ -33,6 +33,7 @@ RSpec.describe "Admin::DishCategoriesController", type: :request do
         post admin_dish_categories_path, params: {
           dish_category: {
             name: "Desserts",
+            category_type: "drinks",
             position: 5
           }
         }
@@ -41,6 +42,7 @@ RSpec.describe "Admin::DishCategoriesController", type: :request do
       expect(response).to redirect_to(admin_dish_categories_path)
       follow_redirect!
       expect(response.body).to include("Catégorie créée avec succès.")
+      expect(DishCategory.last.category_type).to eq("drinks")
     end
 
     it "renders new with unprocessable status when invalid" do
@@ -56,6 +58,7 @@ RSpec.describe "Admin::DishCategoriesController", type: :request do
       patch admin_dish_category_path(category), params: {
         dish_category: {
           name: "Apres",
+          category_type: "drinks",
           position: 2,
           created_at: 10.years.ago
         }
@@ -63,6 +66,7 @@ RSpec.describe "Admin::DishCategoriesController", type: :request do
 
       expect(response).to redirect_to(admin_dish_categories_path)
       expect(category.reload.name).to eq("Apres")
+      expect(category.category_type).to eq("drinks")
       expect(category.position).to eq(2)
       expect(category.created_at).to be > 1.year.ago
     end

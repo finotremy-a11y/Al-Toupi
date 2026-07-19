@@ -18,17 +18,15 @@
       <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
         <% @photos.each_with_index do |photo, idx| %>
           <% if photo.image.attached? %>
-            <div class="break-inside-avoid group al-card al-card-accent-surface overflow-hidden shadow-al-soft hover:shadow-al-medium transition-all duration-300 al-fade-in" style="animation-delay: #{idx * 0.05}s">
-              <div class="relative overflow-hidden rounded-al-lg">
+            <div class="break-inside-avoid group al-card-accent-surface p-2 overflow-hidden shadow-al-soft hover:shadow-al-medium transition-all duration-300 al-fade-in" style="animation-delay: #{idx * 0.05}s; border-radius: 1rem;">
+              <div class="overflow-hidden w-full bg-white" style="border-radius: 0.75rem;">
                 <%= image_tag photo.image,
-                      class: "w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105",
+                      class: "block w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105",
                       alt: photo.title.presence || "Photo Al Toupi" %>
-                <% if photo.title.present? %>
-                  <div class="absolute inset-0 bg-gradient-to-t from-al-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <p class="text-white font-semibold text-lg"><%= photo.title %></p>
-                  </div>
-                <% end %>
               </div>
+              <% if photo.title.present? %>
+                <p class="m-0 px-3 pt-2 pb-2 text-center leading-tight text-al-primary font-semibold text-lg"><%= photo.title %></p>
+              <% end %>
             </div>
           <% end %>
         <% end %>

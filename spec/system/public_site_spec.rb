@@ -10,7 +10,9 @@ RSpec.describe "Public showcase", type: :system do
     create(:setting, key: "horaires", value: "Lun-Dim 12h-14h")
 
     category = create(:dish_category, name: "Desserts", position: 1)
-    create(:dish, dish_category: category, name: "Tarte aux pommes", price: 7.5, position: 1)
+    create(:dish, :with_photo, dish_category: category, name: "Tarte aux pommes", price: 7.5, position: 1)
+    drink_category = create(:dish_category, :drinks, name: "Boissons", position: 2)
+    create(:dish, :with_photo, dish_category: drink_category, position: 1)
     create(:photo, title: "Terrasse")
     create(:photo, title: "Salle")
 
@@ -18,15 +20,21 @@ RSpec.describe "Public showcase", type: :system do
     expect(page).to have_content("Al Toupi")
     expect(page).to have_content("Bienvenue dans notre maison")
     expect(page).to have_link("Accueil")
-    expect(page).to have_link("La Carte")
+    expect(page).to have_link("Notre Carte")
+    expect(page).to have_link("Nos Boissons")
     expect(page).to have_link("Galerie")
     expect(page).to have_link("Contact")
 
-    within("nav.al-nav") { click_link "La Carte" }
+    within("nav.al-nav") { click_link "Notre Carte" }
     expect(page).to have_current_path(menu_path)
     expect(page).to have_content("Desserts")
-    expect(page).to have_content("Tarte aux pommes")
+    expect(page).to have_css("img[alt='Carte Desserts']")
     expect(page).to have_content("Cuisine locale et produits frais")
+
+    within("nav.al-nav") { click_link "Nos Boissons" }
+    expect(page).to have_current_path(drinks_path)
+    expect(page).to have_content("Nos Boissons")
+    expect(page).to have_content("Boissons")
 
     within("nav.al-nav") { click_link "Galerie" }
     expect(page).to have_current_path(gallery_path)

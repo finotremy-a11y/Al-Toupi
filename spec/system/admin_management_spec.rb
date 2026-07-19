@@ -32,6 +32,7 @@ RSpec.describe "Admin management", type: :system do
     click_link "Catégories"
     click_link "Ajouter une catégorie"
     fill_in "Nom", with: "Plats"
+    select "Carte", from: "Type"
     fill_in "Position", with: "1"
     click_button "Créer"
     expect(page).to have_content("Catégorie créée avec succès.")
@@ -44,18 +45,15 @@ RSpec.describe "Admin management", type: :system do
     click_link "Plats"
     click_link "Ajouter un plat"
     select "Plats signatures", from: "Catégorie"
-    fill_in "Nom", with: "Cassoulet"
-    fill_in "Description", with: "Recette maison"
-    fill_in "Prix (€)", with: "18.50"
     fill_in "Position", with: "1"
     attach_file "Photo du plat", Rails.root.join("public/icon.png")
     click_button "Ajouter"
 
     expect(page).to have_content("Plat ajouté avec succès.")
-    expect(page).to have_content("Cassoulet")
+    expect(page).to have_content("Plats signatures")
 
     first(:link, "✏️ Modifier").click
-    fill_in "Nom", with: "Cassoulet premium"
+    fill_in "Position", with: "2"
     click_button "Enregistrer"
     expect(page).to have_content("Plat mis à jour.")
 

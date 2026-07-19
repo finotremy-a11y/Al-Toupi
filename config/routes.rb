@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # == Partie publique ==
   root "pages#home"
   get "carte",   to: "pages#menu",    as: :menu
+  get "boissons", to: "pages#drinks",  as: :drinks
   get "galerie", to: "pages#gallery", as: :gallery
   get "contact", to: "pages#contact", as: :contact
   get "mentions-legales", to: "pages#legal_mentions", as: :legal_mentions

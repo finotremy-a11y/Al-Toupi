@@ -47,7 +47,8 @@
 
         <nav class="al-nav hidden md:flex">
           <%= link_to "Accueil",  root_path,    class: "#{current_page?(root_path) ? 'active' : ''}" %>
-          <%= link_to "La Carte", menu_path,    class: "#{current_page?(menu_path) ? 'active' : ''}" %>
+          <%= link_to "Notre Carte", menu_path, class: "#{current_page?(menu_path) ? 'active' : ''}" %>
+          <%= link_to "Nos Boissons", drinks_path, class: "#{current_page?(drinks_path) ? 'active' : ''}" %>
           <%= link_to "Galerie",  gallery_path, class: "#{current_page?(gallery_path) ? 'active' : ''}" %>
           <%= link_to "Contact",  contact_path, class: "#{current_page?(contact_path) ? 'active' : ''}" %>
         </nav>
@@ -61,8 +62,11 @@
           <%= link_to "Accueil", root_path,
                 class: "px-3 py-3 rounded-al font-semibold text-al-text hover:bg-al-bg-light #{current_page?(root_path) ? 'bg-al-bg-light text-al-primary' : ''}",
                 data: { action: "mobile-nav#close" } %>
-          <%= link_to "La Carte", menu_path,
+              <%= link_to "Notre Carte", menu_path,
                 class: "px-3 py-3 rounded-al font-semibold text-al-text hover:bg-al-bg-light #{current_page?(menu_path) ? 'bg-al-bg-light text-al-primary' : ''}",
+                data: { action: "mobile-nav#close" } %>
+              <%= link_to "Nos Boissons", drinks_path,
+                class: "px-3 py-3 rounded-al font-semibold text-al-text hover:bg-al-bg-light #{current_page?(drinks_path) ? 'bg-al-bg-light text-al-primary' : ''}",
                 data: { action: "mobile-nav#close" } %>
           <%= link_to "Galerie", gallery_path,
                 class: "px-3 py-3 rounded-al font-semibold text-al-text hover:bg-al-bg-light #{current_page?(gallery_path) ? 'bg-al-bg-light text-al-primary' : ''}",
@@ -96,7 +100,13 @@
       <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 py-12">
         <div>
           <h3 class="al-footer-title">Al Toupi</h3>
-          <p><%= setting_value("adresse", "Salles-Curan, Aveyron") %></p>
+          <% full_address = setting_value("adresse", "10 Rue de la Confrérie 12410 Salles-Curan") %>
+          <% postal_line = full_address[/12410\s+Salles-Curan/i] %>
+          <% street_line = postal_line.present? ? full_address.sub(postal_line, "").strip : full_address %>
+          <p><%= street_line.presence || full_address %></p>
+          <% if postal_line.present? %>
+            <p><%= postal_line %></p>
+          <% end %>
         </div>
         <div>
           <h3 class="al-footer-title">Contact</h3>

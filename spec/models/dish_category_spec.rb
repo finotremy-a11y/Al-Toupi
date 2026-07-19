@@ -25,6 +25,12 @@ RSpec.describe DishCategory, type: :model do
       expect(category).not_to be_valid
       expect(category.errors[:name]).to be_present
     end
+
+    it "defaults to menu category type" do
+      category = create(:dish_category)
+
+      expect(category).to be_menu
+    end
   end
 
   describe "scopes" do

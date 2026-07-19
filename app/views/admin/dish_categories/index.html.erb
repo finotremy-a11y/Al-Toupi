@@ -12,6 +12,7 @@
     <thead>
       <tr>
         <th>Nom</th>
+        <th>Type</th>
         <th class="text-center">Position</th>
         <th class="text-center">Plats</th>
         <th class="text-right">Actions</th>
@@ -21,6 +22,11 @@
       <% @dish_categories.each do |category| %>
         <tr>
           <td class="font-semibold text-al-primary text-lg"><%= category.name %></td>
+          <td>
+            <span class="al-badge <%= category.drinks? ? 'al-badge-secondary' : 'al-badge-light' %>">
+              <%= category.drinks? ? "Boissons" : "Carte" %>
+            </span>
+          </td>
           <td class="text-center">
             <span class="al-badge al-badge-light">
               <%= category.position %>
@@ -41,7 +47,7 @@
       <% end %>
       <% if @dish_categories.empty? %>
         <tr>
-          <td colspan="4" class="text-center py-12 text-al-text/50">
+          <td colspan="5" class="text-center py-12 text-al-text/50">
             Aucune catégorie enregistrée.
             <%= link_to "Ajouter la première →", new_admin_dish_category_path, class: "text-al-primary font-semibold hover:underline" %>
           </td>

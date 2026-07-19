@@ -40,6 +40,6 @@ class Admin::DishCategoriesController < Admin::BaseController
   end
 
   def dish_category_params
-    params.require(:dish_category).permit(:name, :position)
+    params.require(:dish_category).permit(:name, :position, :category_type)
   end
 end
