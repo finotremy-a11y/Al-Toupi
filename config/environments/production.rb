@@ -23,6 +23,9 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
+  # Serve blobs through Rails instead of redirecting to disk service URLs.
+  # This avoids host/protocol mismatches behind reverse proxies.
+  config.active_storage.resolve_model_to_route = :rails_storage_proxy
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   config.assume_ssl = ENV.fetch("ASSUME_SSL", "true") == "true"
