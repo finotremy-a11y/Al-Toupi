@@ -57,6 +57,7 @@ mkdir -p "$release_path"
 git -C "$REPO_DIR" archive "$BRANCH" | tar -x -C "$release_path"
 
 echo "==> Link shared files"
+rm -rf "$release_path/storage" "$release_path/log"
 ln -sfn "$SHARED_DIR/storage" "$release_path/storage"
 ln -sfn "$SHARED_DIR/log" "$release_path/log"
 
