@@ -6,7 +6,7 @@
       <div class="w-24 h-1 bg-gradient-to-r from-al-primary to-al-secondary mx-auto rounded-full mb-6"></div>
       <div class="flex flex-col items-center text-center">
         <p class="w-full max-w-2xl text-al-text text-lg font-light">
-          Découvrez les plus beaux moments de nos services et l'ambiance chaleureuse de notre restaurant
+          <%= setting_value("gallery_intro", "Découvrez les plus beaux moments de nos services et l'ambiance chaleureuse de notre restaurant") %>
         </p>
       </div>
     </div>
@@ -19,11 +19,17 @@
         <% @photos.each_with_index do |photo, idx| %>
           <% if photo.image.attached? %>
             <div class="break-inside-avoid group al-card-accent-surface p-2 overflow-hidden shadow-al-soft hover:shadow-al-medium transition-all duration-300 al-fade-in" style="animation-delay: #{idx * 0.05}s; border-radius: 1rem;">
-              <div class="overflow-hidden w-full bg-white" style="border-radius: 0.75rem;">
-                <%= image_tag photo.image,
-                      class: "block w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105",
-                      alt: photo.title.presence || "Photo Al Toupi" %>
-              </div>
+              <%= link_to url_for(photo.image),
+                    class: "al-photo-link group",
+                    target: "_blank",
+                    rel: "noopener",
+                    aria: { label: "Voir #{photo.title.presence || 'la photo'} en entier" } do %>
+                <div class="al-photo-frame al-photo-frame--gallery">
+                  <%= image_tag photo.image,
+                        class: "al-photo-image transition-transform duration-500 group-hover:scale-[1.02]",
+                        alt: photo.title.presence || "Photo Al Toupi" %>
+                </div>
+              <% end %>
               <% if photo.title.present? %>
                 <p class="m-0 px-3 pt-2 pb-2 text-center leading-tight text-al-primary font-semibold text-lg"><%= photo.title %></p>
               <% end %>

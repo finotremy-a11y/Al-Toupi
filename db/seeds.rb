@@ -26,6 +26,8 @@ puts "Création des paramètres..."
   { key: "email", value: "contact@altoupi.fr" },
   { key: "horaires", value: "Lundi – Vendredi : 12h–14h / 19h–22h\nSamedi : 12h–22h\nDimanche : Fermé" },
   { key: "menu_intro", value: "Nos spécialités ? Les viandes succulentes de la région, les fromages d'Aveyron, et une cuisine généreuse qui célèbre les traditions. Chaque plat est préparé avec les meilleurs produits du terroir." },
+  { key: "drink_intro", value: "Découvrez la sélection de boissons disponibles au restaurant." },
+  { key: "gallery_intro", value: "Découvrez les plus beaux moments de nos services et l'ambiance chaleureuse de notre restaurant." },
   { key: "facebook", value: "" },
   { key: "instagram", value: "" },
   { key: "maps_embed_url", value: "https://www.google.com/maps?q=10+Rue+de+la+Confr%C3%A9rie%2C+12410+Salles-Curan&output=embed" },

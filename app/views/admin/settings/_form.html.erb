@@ -15,10 +15,10 @@
       <%= f.label :key, "Clé (identifiant technique)" %>
       <%= f.text_field :key,
             required: true,
-            placeholder: "Ex: legal_company_name, legal_director, legal_host_name",
+        placeholder: "Ex: texte_accueil, menu_intro, drink_intro, gallery_intro",
             class: "al-input font-mono" %>
       <p class="mt-2 text-xs text-al-text/50">Cette clé est utilisée par le site pour récupérer la valeur.</p>
-      <p class="mt-1 text-xs text-al-text/45">Pour les pages légales, utilisez les clés: <span class="font-mono">legal_company_name</span>, <span class="font-mono">legal_director</span>, <span class="font-mono">legal_host_name</span>, <span class="font-mono">legal_host_address</span>, <span class="font-mono">legal_host_phone</span>.</p>
+      <p class="mt-1 text-xs text-al-text/45">Clés utiles: <span class="font-mono">texte_accueil</span>, <span class="font-mono">menu_intro</span>, <span class="font-mono">drink_intro</span>, <span class="font-mono">gallery_intro</span>, <span class="font-mono">legal_company_name</span>, <span class="font-mono">legal_director</span>, <span class="font-mono">legal_host_name</span>, <span class="font-mono">legal_host_address</span>, <span class="font-mono">legal_host_phone</span>.</p>
     </div>
 
     <div class="al-form-group">
@@ -26,7 +26,7 @@
       <%= f.text_area :value,
             rows: 5,
             class: "al-textarea",
-            placeholder: "Ex: SARL Al Toupi, Direction Al Toupi, OVHcloud" %>
+        placeholder: "Ex: Découvrez la sélection de boissons disponibles au restaurant." %>
       <p class="mt-2 text-xs text-al-text/50">Saisissez la valeur affichée sur le site public (footer, contact, mentions légales, etc.).</p>
     </div>
 

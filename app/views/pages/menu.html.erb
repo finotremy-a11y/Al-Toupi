@@ -26,11 +26,17 @@
         </div>
 
         <% if @menu_card.image? %>
-          <div class="rounded-al-lg overflow-hidden bg-white">
-            <%= image_tag @menu_card.file,
-                  class: "w-full h-auto",
-                  alt: @menu_card.title %>
-          </div>
+          <%= link_to url_for(@menu_card.file),
+                class: "al-photo-link group",
+                target: "_blank",
+                rel: "noopener",
+                aria: { label: "Voir #{ @menu_card.title } en entier" } do %>
+            <div class="al-photo-frame al-photo-frame--menu-card">
+              <%= image_tag @menu_card.file,
+                    class: "al-photo-image",
+                    alt: @menu_card.title %>
+            </div>
+          <% end %>
         <% else %>
           <div class="rounded-al-lg overflow-hidden bg-white" style="min-height: 60vh;">
             <iframe
@@ -57,11 +63,17 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <% photo_dishes.each_with_index do |dish, idx| %>
                 <div class="al-card hover:shadow-al-strong transition-all duration-300 al-slide-in" style="animation-delay: #{(cat_index * 0.1) + (idx * 0.05)}s">
-                  <div class="overflow-hidden rounded-al-lg">
-                    <%= image_tag dish.photo,
-                          class: "w-full h-64 object-cover transition-transform duration-500 hover:scale-105",
-                          alt: "Carte #{category.name}" %>
-                  </div>
+                  <%= link_to url_for(dish.photo),
+                        class: "al-photo-link group",
+                        target: "_blank",
+                        rel: "noopener",
+                        aria: { label: "Voir la photo #{category.name} en entier" } do %>
+                    <div class="al-photo-frame al-photo-frame--card">
+                      <%= image_tag dish.photo,
+                            class: "al-photo-image transition-transform duration-500 group-hover:scale-[1.02]",
+                            alt: "Carte #{category.name}" %>
+                    </div>
+                  <% end %>
                 </div>
               <% end %>
             </div>

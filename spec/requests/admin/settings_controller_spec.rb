@@ -27,8 +27,11 @@ RSpec.describe "Admin::SettingsController", type: :request do
       expect(response.body).to include("Paramètres du site")
       expect(response.body).to include("telephone")
       expect(response.body).to include("Informations légales")
+      expect(response.body).to include("Contenus du site")
       expect(response.body).to include("Raison sociale")
       expect(response.body).to include("legal_company_name")
+      expect(response.body).to include("drink_intro")
+      expect(response.body).to include("gallery_intro")
     end
 
     it "prefills key when opening new with key param" do
@@ -36,7 +39,9 @@ RSpec.describe "Admin::SettingsController", type: :request do
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("value=\"legal_company_name\"")
-      expect(response.body).to include("legal_company_name, legal_director, legal_host_name")
+      expect(response.body).to include("Clés utiles")
+      expect(response.body).to include("drink_intro")
+      expect(response.body).to include("gallery_intro")
       expect(response.body).to include("Saisissez la valeur affichée sur le site public")
     end
 

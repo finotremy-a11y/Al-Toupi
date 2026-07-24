@@ -18,17 +18,19 @@ RSpec.describe "PagesController", type: :request do
   describe "GET /carte" do
     it "renders categories and dish photos" do
       category = create(:dish_category, name: "Desserts")
-      create(:dish, :with_photo, dish_category: category, name: "Tarte", description: "Maison", price: 6.5)
+      dish = create(:dish, :with_photo, dish_category: category, name: "Tarte", description: "Maison", price: 6.5)
 
       get menu_path
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("Desserts")
       expect(response.body).to include("Carte Desserts")
+      expect(response.body).to include(CGI.escapeHTML(url_for(dish.photo)))
+      expect(response.body).to include("target=\"_blank\"")
     end
 
     it "renders uploaded menu card when available" do
-      create(:menu_card, title: "Carte photo")
+      menu_card = create(:menu_card, title: "Carte photo")
       create(:dish_category, name: "Desserts")
 
       get menu_path
@@ -36,6 +38,7 @@ RSpec.describe "PagesController", type: :request do
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("Carte photo")
       expect(response.body).to include("Télécharger la carte")
+      expect(response.body).to include(CGI.escapeHTML(url_for(menu_card.file)))
       expect(response.body).not_to include("Desserts")
     end
   end
@@ -43,13 +46,23 @@ RSpec.describe "PagesController", type: :request do
   describe "GET /boissons" do
     it "renders drink categories and photos" do
       drinks_category = create(:dish_category, :drinks, name: "Boissons fraîches")
-      create(:dish, :with_photo, dish_category: drinks_category)
+      dish = create(:dish, :with_photo, dish_category: drinks_category)
 
       get drinks_path
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("Nos Boissons")
       expect(response.body).to include("Boissons fraîches")
+      expect(response.body).to include(CGI.escapeHTML(url_for(dish.photo)))
+    end
+
+    it "renders the configured drinks intro text" do
+      create(:setting, key: "drink_intro", value: "Cocktails maison et boissons fraîches")
+
+      get drinks_path
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Cocktails maison et boissons fraîches")
     end
 
     it "renders empty-state when there are no drink categories" do
@@ -64,13 +77,23 @@ RSpec.describe "PagesController", type: :request do
 
   describe "GET /galerie" do
     it "renders photos" do
-      create(:photo, title: "Salle")
+      photo = create(:photo, title: "Salle")
 
       get gallery_path
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("Galerie")
       expect(response.body).to include("Salle")
+      expect(response.body).to include(CGI.escapeHTML(url_for(photo.image)))
+    end
+
+    it "renders the configured gallery intro text" do
+      create(:setting, key: "gallery_intro", value: "Nos plus beaux instants")
+
+      get gallery_path
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Nos plus beaux instants")
     end
   end
 
@@ -82,6 +105,7 @@ RSpec.describe "PagesController", type: :request do
       get contact_path
 
       expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Informations pratiques")
       expect(response.body).to include("1 rue de la Paix")
       expect(response.body).to include("010203")
     end

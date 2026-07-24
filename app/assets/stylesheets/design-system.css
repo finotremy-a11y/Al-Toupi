@@ -635,6 +635,45 @@ a:hover {
   transform: scale(1.05);
 }
 
+.al-photo-link {
+  display: block;
+}
+
+.al-photo-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: var(--radius-al-lg);
+  background: linear-gradient(180deg, rgba(249, 221, 190, 0.65), rgba(255, 255, 255, 0.96));
+}
+
+.al-photo-frame--menu-card {
+  min-height: 24rem;
+  padding: 0.75rem;
+}
+
+.al-photo-frame--card {
+  aspect-ratio: 4 / 3;
+  min-height: 16rem;
+  padding: 0.75rem;
+}
+
+.al-photo-frame--gallery {
+  aspect-ratio: 4 / 5;
+  min-height: 20rem;
+  padding: 0.75rem;
+}
+
+.al-photo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: calc(var(--radius-al-lg) - 0.25rem);
+  background-color: white;
+}
+
 /* === ADMIN STYLES === */
 .al-admin-header {
   background: linear-gradient(90deg, var(--al-primary) 0%, var(--al-primary-medium) 100%);
